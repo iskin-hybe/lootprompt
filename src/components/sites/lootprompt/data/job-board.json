@@ -1,0 +1,19 @@
+{
+ "done": 0,
+ "goal": 10,
+ "open": 1,
+ "works": 0,
+ "titles": [
+  "My story name is until you're safe"
+ ],
+ "in_works": null,
+ "top_open": [
+  {
+   "id": "d4568fc1-ec13-4066-a49d-c6d17a9b0350",
+   "model": "Seedance 2.5",
+   "title": "My story name is until you're safe",
+   "votes": 0
+  }
+ ],
+ "recent_done": []
+}

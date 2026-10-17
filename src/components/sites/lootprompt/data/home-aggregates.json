@@ -1,0 +1,169 @@
+{
+ "alarm": null,
+ "likes": {
+  "01c1e921-19f1-41b9-89b7-1a1b292f9f72": 1,
+  "024556ca-74a0-452e-bdc9-95d4b51912cc": 2,
+  "16c16ad8-8605-411c-bab2-4c1b8f052dac": 1,
+  "228d6213-e083-4c2a-a28e-8ec237afe6b9": 2,
+  "236f9a08-deec-41b5-bd4a-ad1a11920ad6": 1,
+  "2ffb6668-c58e-42b1-ad99-16668ea80446": 1,
+  "33002f34-fc62-4e96-bb81-1ee77ff30133": 1,
+  "413f336a-af1e-462c-8466-ec614c9d5244": 1,
+  "47301b4f-2ba9-42d4-9335-95e28bce99c3": 1,
+  "52766521-48f3-416f-a647-427a368de40f": 1,
+  "6726da85-9f18-4734-8661-0be726f8bd7b": 1,
+  "73baed34-50e7-4535-9f64-dddde4ecbefe": 1,
+  "7af14656-e3c4-4f15-8572-cd5d01941478": 1,
+  "83056344-f5e1-4447-b24f-31fb4c3dded1": 1,
+  "90db69c3-9047-45a9-a109-e7b02d8bc775": 1,
+  "92310a68-7bc0-4bfa-b0c8-61cdb435795d": 1,
+  "998df20c-5ef1-417d-848c-27586612131a": 2,
+  "9cae42e7-36b5-4736-8f10-228a1759cf28": 1,
+  "9d94c533-22d6-4d81-ba86-d8cf4560670e": 2,
+  "a546ef24-35bf-42e4-a149-9eb589c91b8c": 1,
+  "af6b6d00-a5fd-4f08-a852-8fb4ba701cd7": 2,
+  "b082231e-65b6-4155-855a-f003b0341fba": 1,
+  "b1d94ee8-31df-4d84-87eb-168d07a2573b": 1,
+  "b37af1ea-a77e-41a5-be5c-b4a00958e6f7": 1,
+  "c3881b68-dd0c-4208-8e47-349adcb2d467": 1,
+  "d56cf2b2-2a5a-4ca5-ac6a-3cd79e0958b0": 1,
+  "e04f6bf9-7da7-4786-875e-b86c9589f0e8": 1,
+  "fdf2b48a-46b9-458b-be1a-4ac1901281e8": 1
+ },
+ "stats": {
+  "stolen": 3881,
+  "visits": 14536,
+  "prompts": 51,
+  "thieves": 155
+ },
+ "views": {
+  "00e1572d-e633-420f-ac46-28b9afb76544": 102,
+  "01c1e921-19f1-41b9-89b7-1a1b292f9f72": 460,
+  "024556ca-74a0-452e-bdc9-95d4b51912cc": 585,
+  "13384f5b-d313-47f9-a77f-4a6e2063a7fc": 17,
+  "16c16ad8-8605-411c-bab2-4c1b8f052dac": 331,
+  "228d6213-e083-4c2a-a28e-8ec237afe6b9": 326,
+  "236f9a08-deec-41b5-bd4a-ad1a11920ad6": 88,
+  "276a12fe-3444-40b3-9ff1-a20a0ee00663": 18,
+  "2ffb6668-c58e-42b1-ad99-16668ea80446": 225,
+  "33002f34-fc62-4e96-bb81-1ee77ff30133": 126,
+  "3b884e67-a56d-4d0e-a00f-a2f630806e53": 24,
+  "413f336a-af1e-462c-8466-ec614c9d5244": 149,
+  "436e5e25-b4fe-4475-aada-083413f0894e": 4,
+  "47301b4f-2ba9-42d4-9335-95e28bce99c3": 184,
+  "4a9aa9fe-65fc-4df7-ab65-277cdd2be1fa": 49,
+  "52766521-48f3-416f-a647-427a368de40f": 108,
+  "58ddcfe4-53a7-44e8-8624-7d4abb401452": 119,
+  "5b6b6356-b532-4129-a618-473deaccb926": 82,
+  "6726da85-9f18-4734-8661-0be726f8bd7b": 93,
+  "6bc2402b-db5d-4802-8138-83691274f043": 14,
+  "73baed34-50e7-4535-9f64-dddde4ecbefe": 155,
+  "75eb76a8-b639-4325-80ed-df8d0acbdd6d": 470,
+  "7af14656-e3c4-4f15-8572-cd5d01941478": 123,
+  "7cf7551f-9da5-485a-b22b-fb970dea36f0": 7,
+  "83056344-f5e1-4447-b24f-31fb4c3dded1": 145,
+  "8c5dc669-0b2a-4bc3-96e1-11b9e9410259": 124,
+  "8c7464fd-63dc-4361-94c8-5c0cbc268931": 317,
+  "90db69c3-9047-45a9-a109-e7b02d8bc775": 37,
+  "92310a68-7bc0-4bfa-b0c8-61cdb435795d": 112,
+  "998df20c-5ef1-417d-848c-27586612131a": 315,
+  "9cae42e7-36b5-4736-8f10-228a1759cf28": 124,
+  "9d94c533-22d6-4d81-ba86-d8cf4560670e": 1780,
+  "a09780f4-d865-4c7b-81f7-9921c54abbe0": 15,
+  "a11c7a83-d748-40a0-b1d7-dee35300229f": 9,
+  "a292240c-8a2f-40c8-8135-590758c07d39": 6,
+  "a546ef24-35bf-42e4-a149-9eb589c91b8c": 118,
+  "ace1d747-4099-449b-b228-5739f67a8be4": 1,
+  "af6b6d00-a5fd-4f08-a852-8fb4ba701cd7": 159,
+  "b082231e-65b6-4155-855a-f003b0341fba": 146,
+  "b1d94ee8-31df-4d84-87eb-168d07a2573b": 81,
+  "b37af1ea-a77e-41a5-be5c-b4a00958e6f7": 163,
+  "c3881b68-dd0c-4208-8e47-349adcb2d467": 298,
+  "ca264769-eb36-4445-8fe6-61586a6e02bc": 12,
+  "d56cf2b2-2a5a-4ca5-ac6a-3cd79e0958b0": 750,
+  "dfc77db8-d57f-4f1d-abca-0c08fff23c16": 65,
+  "e04f6bf9-7da7-4786-875e-b86c9589f0e8": 81,
+  "ed223878-e269-4273-af7e-8f4e69c10c71": 276,
+  "eeae5a28-af59-4910-a5c4-fc92f85403d3": 74,
+  "ef8e6eca-a72d-41f3-aff8-b8fc566120a9": 8,
+  "f77648a2-679d-4e88-b022-c9219111c92d": 208,
+  "fdf2b48a-46b9-458b-be1a-4ac1901281e8": 142
+ },
+ "brands": [
+  {
+   "id": "8bdd9991-59b0-430e-b8e9-c9cc40cfed73",
+   "name": "arcads",
+   "slug": "arcads",
+   "link_url": "https://www.arcads.ai/",
+   "logo_url": "/sites/lootprompt/brands/arcads-ink.png"
+  },
+  {
+   "id": "a4f09e54-8f34-48e6-816b-94ae66532890",
+   "name": "invideo",
+   "slug": "invideo",
+   "link_url": "https://invideo.io/i/DENIZ-ig",
+   "logo_url": "/sites/lootprompt/brands/invideo-ink.png"
+  }
+ ],
+ "trending": [
+  "c3881b68-dd0c-4208-8e47-349adcb2d467",
+  "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+  "b1d94ee8-31df-4d84-87eb-168d07a2573b"
+ ],
+ "cached_at": "2026-10-17T19:58:04.915936+00:00",
+ "daily_pick": "b082231e-65b6-4155-855a-f003b0341fba",
+ "promo_slots": [
+  {
+   "id": "partner_tag",
+   "enabled": true,
+   "link_url": "https://invideo.io/i/DENIZ-ig",
+   "hand_text": "Try every prompt",
+   "brand_slug": "invideo",
+   "grotesk_text": "on invideo"
+  }
+ ],
+ "rank_config": {
+  "rank_2": 60,
+  "rank_3": 220,
+  "rank_4": 600,
+  "rank_5": 1500,
+  "pts_save": 2,
+  "pts_steal": 3,
+  "pts_streak_day": 5
+ },
+ "vault_status": null,
+ "daily_history": [
+  {
+   "day": "2026-10-17",
+   "prompt_id": "b082231e-65b6-4155-855a-f003b0341fba"
+  },
+  {
+   "day": "2026-10-16",
+   "prompt_id": "e04f6bf9-7da7-4786-875e-b86c9589f0e8"
+  },
+  {
+   "day": "2026-10-15",
+   "prompt_id": "a09780f4-d865-4c7b-81f7-9921c54abbe0"
+  },
+  {
+   "day": "2026-10-14",
+   "prompt_id": "83056344-f5e1-4447-b24f-31fb4c3dded1"
+  },
+  {
+   "day": "2026-10-13",
+   "prompt_id": "92310a68-7bc0-4bfa-b0c8-61cdb435795d"
+  },
+  {
+   "day": "2026-10-12",
+   "prompt_id": "e04f6bf9-7da7-4786-875e-b86c9589f0e8"
+  },
+  {
+   "day": "2026-10-11",
+   "prompt_id": "fdf2b48a-46b9-458b-be1a-4ac1901281e8"
+  }
+ ],
+ "recently_stolen": [
+  "4a9aa9fe-65fc-4df7-ab65-277cdd2be1fa",
+  "8c7464fd-63dc-4361-94c8-5c0cbc268931"
+ ]
+}

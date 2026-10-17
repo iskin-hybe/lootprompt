@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- kağıt zemin, hafif yuvarlak köşe -->
+  <rect x="0" y="0" width="512" height="512" rx="96" fill="#F5F1E8"/>
+  <!-- milimetrik grid -->
+  <g stroke="#E3DED2" stroke-width="4">
+    <path d="M85 0V512M171 0V512M256 0V512M341 0V512M427 0V512"/>
+    <path d="M0 85H512M0 171H512M0 256H512M0 341H512M0 427H512"/>
+  </g>
+  <!-- mürekkep hırsız maskesi -->
+  <g>
+    <!-- maske gövdesi: uçları sivrilen bant -->
+    <path d="M60 256
+             C 60 200, 140 168, 256 168
+             C 372 168, 452 200, 452 256
+             C 452 312, 372 344, 256 344
+             C 140 344, 60 312, 60 256 Z"
+          fill="#141414"/>
+    <!-- göz delikleri -->
+    <ellipse cx="172" cy="252" rx="52" ry="40" fill="#F5F1E8"/>
+    <ellipse cx="340" cy="252" rx="52" ry="40" fill="#F5F1E8"/>
+    <!-- göz bebekleri: yana bakan muzip bakış -->
+    <circle cx="188" cy="258" r="17" fill="#141414"/>
+    <circle cx="356" cy="258" r="17" fill="#141414"/>
+  </g>
+  <!-- el çizimi alt çizgi -->
+  <path d="M120 408 C 200 396, 320 418, 396 404"
+        stroke="#141414" stroke-width="16" stroke-linecap="round" fill="none"/>
+</svg>

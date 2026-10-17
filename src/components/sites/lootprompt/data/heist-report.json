@@ -1,0 +1,489 @@
+{
+ "heat": [
+  [
+   15,
+   10,
+   1,
+   6,
+   2,
+   4,
+   8,
+   13,
+   8,
+   12,
+   8,
+   18,
+   17,
+   17,
+   23,
+   24,
+   24,
+   33,
+   19,
+   21,
+   15,
+   20,
+   18,
+   14
+  ],
+  [
+   10,
+   4,
+   8,
+   8,
+   6,
+   13,
+   4,
+   5,
+   12,
+   11,
+   12,
+   13,
+   28,
+   15,
+   14,
+   23,
+   16,
+   16,
+   6,
+   21,
+   21,
+   8,
+   8,
+   5
+  ],
+  [
+   6,
+   5,
+   5,
+   11,
+   8,
+   5,
+   7,
+   3,
+   8,
+   12,
+   18,
+   12,
+   17,
+   14,
+   22,
+   24,
+   38,
+   38,
+   23,
+   35,
+   20,
+   52,
+   15,
+   14
+  ],
+  [
+   11,
+   12,
+   5,
+   8,
+   8,
+   5,
+   11,
+   17,
+   18,
+   13,
+   33,
+   20,
+   37,
+   47,
+   31,
+   30,
+   25,
+   11,
+   19,
+   21,
+   19,
+   18,
+   24,
+   20
+  ],
+  [
+   15,
+   18,
+   9,
+   13,
+   7,
+   12,
+   8,
+   6,
+   15,
+   14,
+   11,
+   15,
+   11,
+   10,
+   11,
+   16,
+   20,
+   9,
+   23,
+   20,
+   25,
+   15,
+   17,
+   8
+  ],
+  [
+   18,
+   20,
+   9,
+   9,
+   5,
+   10,
+   11,
+   3,
+   7,
+   17,
+   26,
+   13,
+   17,
+   21,
+   32,
+   26,
+   28,
+   19,
+   34,
+   27,
+   31,
+   14,
+   18,
+   5
+  ],
+  [
+   10,
+   9,
+   4,
+   2,
+   6,
+   6,
+   8,
+   3,
+   10,
+   10,
+   8,
+   7,
+   8,
+   13,
+   13,
+   12,
+   22,
+   13,
+   13,
+   13,
+   19,
+   18,
+   22,
+   16
+  ]
+ ],
+ "daily": [
+  {
+   "day": "2026-09-20",
+   "steals": 146,
+   "visits": 527,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-09-21",
+   "steals": 177,
+   "visits": 654,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-09-22",
+   "steals": 103,
+   "visits": 407,
+   "new_thieves": 0
+  },
+  {
+   "day": "2026-09-23",
+   "steals": 186,
+   "visits": 591,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-09-24",
+   "steals": 335,
+   "visits": 972,
+   "new_thieves": 4
+  },
+  {
+   "day": "2026-09-25",
+   "steals": 208,
+   "visits": 777,
+   "new_thieves": 4
+  },
+  {
+   "day": "2026-09-26",
+   "steals": 185,
+   "visits": 683,
+   "new_thieves": 12
+  },
+  {
+   "day": "2026-09-27",
+   "steals": 72,
+   "visits": 317,
+   "new_thieves": 3
+  },
+  {
+   "day": "2026-09-28",
+   "steals": 109,
+   "visits": 406,
+   "new_thieves": 6
+  },
+  {
+   "day": "2026-09-29",
+   "steals": 81,
+   "visits": 355,
+   "new_thieves": 9
+  },
+  {
+   "day": "2026-09-30",
+   "steals": 74,
+   "visits": 341,
+   "new_thieves": 5
+  },
+  {
+   "day": "2026-10-01",
+   "steals": 48,
+   "visits": 272,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-02",
+   "steals": 36,
+   "visits": 197,
+   "new_thieves": 1
+  },
+  {
+   "day": "2026-10-03",
+   "steals": 33,
+   "visits": 170,
+   "new_thieves": 1
+  },
+  {
+   "day": "2026-10-04",
+   "steals": 20,
+   "visits": 136,
+   "new_thieves": 3
+  },
+  {
+   "day": "2026-10-05",
+   "steals": 24,
+   "visits": 144,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-06",
+   "steals": 26,
+   "visits": 154,
+   "new_thieves": 5
+  },
+  {
+   "day": "2026-10-07",
+   "steals": 104,
+   "visits": 197,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-08",
+   "steals": 38,
+   "visits": 165,
+   "new_thieves": 7
+  },
+  {
+   "day": "2026-10-09",
+   "steals": 49,
+   "visits": 192,
+   "new_thieves": 4
+  },
+  {
+   "day": "2026-10-10",
+   "steals": 33,
+   "visits": 169,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-11",
+   "steals": 27,
+   "visits": 150,
+   "new_thieves": 4
+  },
+  {
+   "day": "2026-10-12",
+   "steals": 40,
+   "visits": 250,
+   "new_thieves": 6
+  },
+  {
+   "day": "2026-10-13",
+   "steals": 77,
+   "visits": 338,
+   "new_thieves": 8
+  },
+  {
+   "day": "2026-10-14",
+   "steals": 48,
+   "visits": 185,
+   "new_thieves": 4
+  },
+  {
+   "day": "2026-10-15",
+   "steals": 42,
+   "visits": 150,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-16",
+   "steals": 30,
+   "visits": 206,
+   "new_thieves": 2
+  },
+  {
+   "day": "2026-10-17",
+   "steals": 61,
+   "visits": 195,
+   "new_thieves": 6
+  }
+ ],
+ "radio": [
+  {
+   "at": "2026-10-17T19:35:34.407519+00:00",
+   "id": "4a9aa9fe-65fc-4df7-ab65-277cdd2be1fa",
+   "title": "The Desert Bite"
+  },
+  {
+   "at": "2026-10-17T19:22:14.352056+00:00",
+   "id": "8c7464fd-63dc-4361-94c8-5c0cbc268931",
+   "title": "The Handoff"
+  },
+  {
+   "at": "2026-10-17T17:42:58.827613+00:00",
+   "id": "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+   "title": "The Borrowed Orbit"
+  },
+  {
+   "at": "2026-10-17T17:35:02.400536+00:00",
+   "id": "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+   "title": "The Borrowed Orbit"
+  },
+  {
+   "at": "2026-10-17T17:28:01.017723+00:00",
+   "id": "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+   "title": "The Borrowed Orbit"
+  },
+  {
+   "at": "2026-10-17T16:33:53.010095+00:00",
+   "id": "5b6b6356-b532-4129-a618-473deaccb926",
+   "title": "@deniz.akkabak"
+  },
+  {
+   "at": "2026-10-17T16:20:42.081943+00:00",
+   "id": "e04f6bf9-7da7-4786-875e-b86c9589f0e8",
+   "title": "The Screen Fights Back"
+  },
+  {
+   "at": "2026-10-17T16:19:52.91315+00:00",
+   "id": "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+   "title": "The Borrowed Orbit"
+  },
+  {
+   "at": "2026-10-17T16:18:59.149308+00:00",
+   "id": "e04f6bf9-7da7-4786-875e-b86c9589f0e8",
+   "title": "The Screen Fights Back"
+  },
+  {
+   "at": "2026-10-17T16:15:07.860133+00:00",
+   "id": "276a12fe-3444-40b3-9ff1-a20a0ee00663",
+   "title": "Valhalla Delivery"
+  },
+  {
+   "at": "2026-10-17T16:13:14.27969+00:00",
+   "id": "276a12fe-3444-40b3-9ff1-a20a0ee00663",
+   "title": "Valhalla Delivery"
+  },
+  {
+   "at": "2026-10-17T16:11:54.407007+00:00",
+   "id": "276a12fe-3444-40b3-9ff1-a20a0ee00663",
+   "title": "Valhalla Delivery"
+  }
+ ],
+ "today": "2026-10-17",
+ "hot_loot": [
+  {
+   "n": 167,
+   "id": "c3881b68-dd0c-4208-8e47-349adcb2d467",
+   "title": "Ultimate Cinematic Realism Blueprint"
+  },
+  {
+   "n": 30,
+   "id": "9d94c533-22d6-4d81-ba86-d8cf4560670e",
+   "title": "The Borrowed Orbit"
+  },
+  {
+   "n": 23,
+   "id": "b1d94ee8-31df-4d84-87eb-168d07a2573b",
+   "title": "Time Glitch"
+  }
+ ],
+ "last_hour": 2,
+ "night_pct": 9,
+ "steals_7d": 339,
+ "categories": [
+  {
+   "n": 22,
+   "category": "Video"
+  },
+  {
+   "n": 17,
+   "category": "Photo"
+  },
+  {
+   "n": 6,
+   "category": "Video + Photo"
+  },
+  {
+   "n": 6,
+   "category": "Audio"
+  }
+ ],
+ "record_day": {
+  "n": 335,
+  "day": "2026-09-24"
+ },
+ "most_wanted": {
+  "place": 1,
+  "steals": 12,
+  "username": "mianadeelhafeez1",
+  "top_badges": [
+   {
+    "key": "first_steal",
+    "tier": 3
+   },
+   {
+    "key": "night_job",
+    "tier": 1
+   },
+   {
+    "key": "all_categories",
+    "tier": 1
+   }
+  ],
+  "avatar_seed": "cc36bb60e476",
+  "badge_count": 3,
+  "avatar_style": null,
+  "display_name": "Mian Adeel Hafeez",
+  "night_steals": 3
+ },
+ "generated_at": "2026-10-17T20:01:24.652099+00:00",
+ "last_steal_at": "2026-10-17T19:35:34.407519+00:00",
+ "visitors_today": 148,
+ "member_steals_7d": 33
+}
