@@ -3,7 +3,7 @@
 import { ChevronDown, Moon, UserPlus } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { SITE_ORIGIN, thievesBoard, type Thief, type ThiefPeriod } from "../data";
-import { openCrewGate } from "../shared/crew-gate";
+import { AuthModal } from "../chrome/auth-modal";
 import { CrownHeistCanvas } from "./crown-heist-canvas";
 import { ThiefAvatar } from "./thief-avatar";
 import { ThiefBadges } from "./thief-badges";
@@ -126,19 +126,22 @@ function PodiumCard({
   );
 }
 
-/** Guest "Follow" button; following needs an account, so it opens the crew gate. */
+/** Guest "Follow" button; following needs an account, so it opens the sign-in dialog. */
 function FollowButton({ username }: { username: string }) {
+  const [authOpen, setAuthOpen] = useState(false);
+
   return (
     <span className="thief-follow-wrap is-compact">
       <button
         type="button"
         className={EDITORIAL_SM}
         aria-label={`Follow @${username}`}
-        onClick={() => openCrewGate("follow")}
+        onClick={() => setAuthOpen(true)}
       >
         <UserPlus />
         Follow
       </button>
+      {authOpen ? <AuthModal initialTab="login" onClose={() => setAuthOpen(false)} /> : null}
     </span>
   );
 }

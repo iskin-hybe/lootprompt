@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { prompts } from "../data";
 import { LazyMount } from "../shared/lazy-mount";
 import { Space3DPreview } from "./space-3d-preview";
-import { VAULT_GATE_LINE, VaultGate } from "./vault-gate";
+import { VaultGate } from "../chrome/vault-gate";
 
 /** Posters on the reel: the 11 most-stolen image prompts. */
 const POSTERS = prompts
@@ -28,7 +28,7 @@ export function VaultPreview() {
     >
       <span
         className="vault-members-tag absolute right-6 top-10 z-20 inline-flex items-center gap-1.5 sm:right-7"
-        title={VAULT_GATE_LINE}
+        title="Join the crew and unlock 3D prompt stealing."
       >
         <Lock className="size-3" aria-hidden="true" />
         Members only
