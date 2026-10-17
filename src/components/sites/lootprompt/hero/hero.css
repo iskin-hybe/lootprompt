@@ -1,0 +1,58 @@
+/* Hero rules missing from lootprompt.css, copied from the source stylesheet. */
+.hero-signature {
+  color: var(--foreground);
+  clip-path: none;
+  position: relative;
+  overflow: visible;
+  transform: none;
+}
+.hero-signature h1,
+.hero-signature .hero-sig-line {
+  clip-path: none;
+  position: static;
+  overflow: visible;
+  transform: none;
+}
+@keyframes ink-draw {
+  0% {
+    stroke-dashoffset: 1000px;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hero-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-intro .ink-draw path {
+  stroke-dashoffset: 1000px;
+  animation: 0.85s cubic-bezier(0.22, 1, 0.36, 1) 2.5s forwards ink-draw;
+}
+.hero-intro .hero-fade {
+  animation: 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.9s both hero-rise;
+}
+.hero-intro .hero-fade-late {
+  animation-delay: 3.08s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-draw path,
+  .hero-intro .ink-draw path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .hero-intro .hero-fade {
+    clip-path: none;
+    opacity: 1;
+    animation: none;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
