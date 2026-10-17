@@ -1,0 +1,129 @@
+.thief-avatar-pack {
+  isolation: isolate;
+  border-radius: 999px;
+  flex: none;
+  place-items: center;
+  display: inline-grid;
+  position: relative;
+}
+.thief-avatar-pack img {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.thief-avatar-pack.is-premium:before {
+  content: "";
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(#d7a52b, #fff1a8, #9fdcff, #ddb0ff, #d7a52b);
+  animation: 7s linear infinite thief-avatar-shimmer;
+  position: absolute;
+  inset: -3px;
+}
+.case-report.is-visible .case-dial {
+  animation: 7s ease-in-out infinite alternate case-dial;
+}
+.case-report.is-visible .case-live i {
+  animation: 1.2s infinite case-blink;
+}
+.case-flipping {
+  animation: 0.12s ease-in case-flip;
+}
+.case-report.is-visible .case-ping {
+  animation: 1.6s infinite case-ping;
+}
+.case-collapse.is-open {
+  grid-template-rows: 1fr;
+}
+.case-collapse:not(.is-open) .case-details {
+  visibility: hidden;
+}
+.case-collapse.is-open .case-details > * {
+  animation: 0.35s both case-rise;
+}
+.case-collapse.is-open .case-details > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.case-collapse.is-open .case-details > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+.case-collapse.is-open .case-details > :nth-child(4) {
+  animation-delay: 0.24s;
+}
+.case-chart-bar.is-peak {
+  background: var(--case-red);
+}
+.case-split.no-wanted {
+  grid-template-columns: 1fr;
+}
+.case-heat-cell.is-peak {
+  background: var(--case-red);
+}
+.case-report.is-visible .case-moon {
+  animation: 3s ease-in-out infinite alternate case-moon;
+}
+.case-radio-container.is-open {
+  display: block;
+}
+.case-tile.is-hot {
+  animation: 0.7s case-hot;
+}
+[data-offscreen="1"] .thief-avatar-pack:before {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .thief-avatar-pack.is-premium:before {
+    animation: none;
+  }
+}
+
+@keyframes thief-avatar-shimmer {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes case-dial {
+  to {
+    transform: rotate(115deg);
+  }
+}
+
+@keyframes case-flip {
+  50% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes case-ping {
+  to {
+    box-shadow: 0 0 0 9px #0000;
+  }
+}
+
+@keyframes case-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes case-moon {
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes case-hot {
+  to {
+    box-shadow: 0 0 0 12px #0000;
+  }
+  30% {
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--case-red) 50%, transparent);
+  }
+}

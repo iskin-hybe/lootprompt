@@ -1,0 +1,95 @@
+.daily-safe-art--locked {
+  animation: 4.2s ease-in-out infinite daily-safe-breathe;
+}
+.daily-safe-art--locked .daily-safe-dial-spokes,
+.daily-safe-art--locked .daily-safe-dial {
+  transform-origin: 60px 60px;
+  animation: 6s ease-in-out infinite daily-dial-drift;
+}
+.daily-safe-art--opening {
+  animation: 1.5s ease-in-out daily-safe-shake;
+}
+.daily-safe-art--opening .daily-safe-dial-spokes {
+  transform-origin: 60px 60px;
+  animation: 0.9s cubic-bezier(0.34, 1.2, 0.4, 1) both daily-dial-spin;
+}
+.daily-safe-art--opening .daily-safe-handle {
+  transform-origin: 92px 65px;
+  animation: 0.4s ease-out 0.85s both daily-handle-turn;
+}
+.daily-safe-art--opening .daily-safe-door {
+  transform-origin: 18px 60px;
+  animation: 0.55s ease-out 0.95s both daily-door-swing;
+}
+@media (prefers-reduced-motion: reduce) {
+  .daily-safe-art--locked .daily-safe-dial,
+  .daily-safe-art--locked .daily-safe-dial-spokes {
+    animation: none !important;
+  }
+}
+
+@keyframes daily-safe-breathe {
+  0%,
+  to {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.018);
+  }
+}
+
+@keyframes daily-dial-drift {
+  0%,
+  to {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes daily-safe-shake {
+  0%,
+  to {
+    transform: translate(0);
+  }
+  10%,
+  30%,
+  50% {
+    transform: translate(-1px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translate(1px);
+  }
+}
+
+@keyframes daily-dial-spin {
+  0% {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(1040deg);
+  }
+}
+
+@keyframes daily-handle-turn {
+  0% {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-78deg);
+  }
+}
+
+@keyframes daily-door-swing {
+  0% {
+    opacity: 1;
+    transform: perspective(420px) rotateY(0);
+  }
+  to {
+    opacity: 0.35;
+    transform: perspective(420px) rotateY(-72deg);
+  }
+}
