@@ -1,0 +1,224 @@
+/* Chrome rules missing from lootprompt.css (the source stylesheet builds these class
+   names with template literals, so the homepage filter dropped them). Copied verbatim
+   from the source stylesheet. */
+.theme-toggle {
+  cursor: pointer;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--muted-foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 9999px;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .theme-toggle {
+    border: 1px solid color-mix(in oklab, var(--foreground) 16%, transparent);
+  }
+}
+.theme-toggle {
+  background: var(--background);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .theme-toggle {
+    background: color-mix(in oklab, var(--background) 82%, transparent);
+  }
+}
+.theme-toggle {
+  transition:
+    color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-toggle:hover {
+  color: var(--foreground);
+  border-color: var(--foreground);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .theme-toggle:hover {
+    border-color: color-mix(in oklab, var(--foreground) 34%, transparent);
+  }
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--foreground);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .theme-toggle:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--foreground) 45%, transparent);
+  }
+}
+.theme-toggle:focus-visible {
+  outline-offset: 2px;
+}
+.floor-thief.is-you {
+  opacity: 0.85;
+}
+.floor-notification.is-read {
+  opacity: 0.6;
+}
+.thief-avatar-pack {
+  isolation: isolate;
+  border-radius: 999px;
+  flex: none;
+  place-items: center;
+  display: inline-grid;
+  position: relative;
+}
+.thief-avatar-pack img {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.thief-avatar-pack.is-premium:before {
+  content: "";
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(#d7a52b, #fff1a8, #9fdcff, #ddb0ff, #d7a52b);
+  animation: 7s linear infinite thief-avatar-shimmer;
+  position: absolute;
+  inset: -3px;
+}
+@media (width<=639px) {
+  .header-actions .theme-toggle {
+    height: 2rem;
+  }
+}
+@media (width<=639px) {
+  .header-actions .theme-toggle {
+    width: 2rem;
+  }
+}
+.header-actions .theme-toggle:hover {
+  border-color: var(--foreground);
+  transform: translateY(-1px);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .header-actions .theme-toggle:hover {
+    border-color: color-mix(in oklab, var(--foreground) 40%, transparent);
+  }
+}
+.header-actions .theme-toggle {
+  height: 2.3rem;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.header-actions .theme-toggle {
+  width: 2.3rem;
+}
+.theme-toggle.is-dark .theme-rays {
+  opacity: 0;
+  transform: scale(0.55);
+}
+.theme-toggle.is-dark .theme-sparks {
+  opacity: 0.75;
+}
+.theme-toggle.is-dark .theme-bite {
+  transform: translate(-9px, 3px);
+}
+.theme-toggle.is-dark .theme-disc {
+  transform: scale(1.12) rotate(-12deg);
+}
+.partner-promo.is-attention {
+  animation: 1.2s ease-in-out partner-promo-attention;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-promo.is-attention {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+[data-offscreen="1"] .thief-avatar-pack:before {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .thief-avatar-pack.is-premium:before {
+    animation: none;
+  }
+}
+.crew-gate-poster {
+  border: 1.5px solid var(--foreground);
+  background: var(--foreground);
+  border-radius: 16px;
+  place-items: center;
+  min-height: 280px;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .crew-gate-poster {
+    background: color-mix(in oklab, var(--foreground) 6%, transparent);
+  }
+}
+.crew-gate-poster img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+@media (width<=639px) {
+  .crew-gate-poster {
+    height: 120px;
+    min-height: 120px;
+  }
+}
+.crew-window-avatar {
+  border: 2px solid var(--card-surface);
+  border-radius: 999px;
+  margin-right: -8px;
+  transition: transform 0.26s;
+}
+.crew-window-avatar.is-blink {
+  animation: 0.6s crew-blink;
+}
+@media (width<=639px) {
+  .crew-window-avatar:not(:first-child) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crew-window-avatar.is-blink {
+    animation: none;
+  }
+}
+.crew-gate-poster.is-job-board {
+  background: var(--card-surface);
+}
+.crew-gate-poster.is-job-board svg {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+}
+@keyframes thief-avatar-shimmer {
+  to {
+    rotate: 1turn;
+  }
+}
+@keyframes partner-promo-attention {
+  0%,
+  to {
+    transform: rotate(0);
+  }
+  18% {
+    transform: rotate(-4deg);
+  }
+  38% {
+    transform: rotate(3.5deg);
+  }
+  58% {
+    transform: rotate(-2.5deg);
+  }
+  78% {
+    transform: rotate(1.5deg);
+  }
+}
+@keyframes crew-blink {
+  40% {
+    transform: scaleY(0.2) translateY(4px);
+  }
+}

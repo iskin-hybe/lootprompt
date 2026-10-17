@@ -1,0 +1,140 @@
+/*
+ * Motion for the "Step inside the vault" reel monitor. The source drives these
+ * with framer-motion; durations and easings are copied from its props.
+ */
+
+/* Gentle float on the heading and the monitor: y [0, -4, 0], 6s easeInOut. */
+.vp-bob {
+  animation: vp-bob 6s ease-in-out infinite;
+}
+@keyframes vp-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Background wall grid: backgroundPositionX 0 -> 70px, 8s linear. */
+.vp-wall-grid {
+  animation: vp-wall-drift 8s linear infinite;
+}
+@keyframes vp-wall-drift {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: 70px;
+  }
+}
+
+/* Background floor grid: backgroundPositionY 0 -> 70px, 6s linear. */
+.vp-floor-grid {
+  animation: vp-floor-drift 6s linear infinite;
+}
+@keyframes vp-floor-drift {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: 70px;
+  }
+}
+
+/* Tunnel floor inside the monitor: 0 -> 60px, 5s linear. */
+.vp-tunnel-floor {
+  animation: vp-tunnel-floor 5s linear infinite;
+}
+@keyframes vp-tunnel-floor {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: 60px;
+  }
+}
+
+/* Tunnel ceiling inside the monitor: 0 -> -60px, 7s linear. */
+.vp-tunnel-ceiling {
+  animation: vp-tunnel-ceiling 7s linear infinite;
+}
+@keyframes vp-tunnel-ceiling {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: -60px;
+  }
+}
+
+/* Poster carousel sway: rotateY [-10, 10, -10], 16s easeInOut. */
+.vp-carousel {
+  transform: rotateY(-10deg);
+  animation: vp-sway 16s ease-in-out infinite;
+}
+@keyframes vp-sway {
+  0%,
+  100% {
+    transform: rotateY(-10deg);
+  }
+  50% {
+    transform: rotateY(10deg);
+  }
+}
+
+/* Dust motes: y [0, -10, 0], opacity [0.3, 0.8, 0.3], easeInOut. */
+.vp-mote {
+  animation-name: vp-mote;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes vp-mote {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-10px);
+  }
+}
+
+/* Scan line: top 0% -> 100%, 3.6s linear. */
+.vp-scan {
+  top: 0%;
+  animation: vp-scan 3.6s linear infinite;
+}
+@keyframes vp-scan {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+/* whileInView: opacity 0, y 20 -> opacity 1, y 0 over 0.9s. */
+.vp-stage {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vp-stage.is-in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* whileHover: scale 1.015 (framer's default scale spring, settles in ~0.3s). */
+.vp-monitor {
+  transition: transform 0.32s cubic-bezier(0.3, 1.25, 0.5, 1);
+}
+@media (hover: hover) {
+  .vp-monitor:hover {
+    transform: scale(1.015);
+  }
+}
