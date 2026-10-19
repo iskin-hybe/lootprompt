@@ -67,7 +67,8 @@ function useCountUp(value: number, duration: number, start: "value" | "zero") {
           cancel = animate();
         }
       },
-      { threshold: 0.2 },
+      // Extends above the viewport so counters a fast scroll skips past still roll.
+      { rootMargin: "100000px 0px 0px 0px", threshold: 0.2 },
     );
     io.observe(el);
     return () => {

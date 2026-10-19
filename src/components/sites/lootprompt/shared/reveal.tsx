@@ -25,7 +25,9 @@ export function Reveal({
           observer.disconnect();
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      // The root reaches far above the viewport so a card a fast scroll jumps past
+      // (below the fold one frame, above it the next) still counts as seen.
+      { rootMargin: "100000px 0px -8% 0px", threshold: 0.08 },
     );
     observer.observe(el);
     return () => observer.disconnect();
