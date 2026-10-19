@@ -38,7 +38,7 @@ export function ToastHost() {
       timers.add(
         window.setTimeout(() => {
           setItems((list) => list.map((t) => (t.id === id ? { ...t, leaving: true } : t)));
-          timers.add(window.setTimeout(() => setItems((list) => list.filter((t) => t.id !== id)), 220));
+          timers.add(window.setTimeout(() => setItems((list) => list.filter((t) => t.id !== id)), 400));
         }, duration),
       );
     };
@@ -52,23 +52,13 @@ export function ToastHost() {
   if (!mounted || items.length === 0) return null;
 
   return createPortal(
-    <ol
-      aria-live="polite"
-      className="pointer-events-none fixed inset-x-4 bottom-4 z-[999999999] flex flex-col items-center gap-2 sm:bottom-8"
-    >
+    <ol aria-live="polite" className="gal-toaster">
       {items.map((t) => (
-        <li
-          key={t.id}
-          className={`pointer-events-auto transition-all duration-200 ease-out ${
-            t.leaving ? "translate-y-2 opacity-0" : "animate-in fade-in-0 slide-in-from-bottom-4 duration-300"
-          }`}
-        >
+        <li key={t.id} className="gal-toast-item" data-kind={t.kind} data-leaving={t.leaving ? "true" : undefined}>
           {t.kind === "ink" ? (
             <div className="ink-toast font-ui text-[0.72rem] tracking-[0.06em]">{t.text}</div>
           ) : (
-            <div className="flex w-full items-center gap-1.5 rounded-lg border border-border bg-background p-4 font-ui text-[13px] text-foreground shadow-lg sm:w-[356px]">
-              {t.text}
-            </div>
+            <div className="gal-toast">{t.text}</div>
           )}
         </li>
       ))}

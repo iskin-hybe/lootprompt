@@ -1,25 +1,6 @@
 /* Source rules for the gallery and prompt cards that lootprompt.css does not carry.
    Copied verbatim from lootprompt.com's stylesheet. */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(24px) rotate(var(--reveal-rot, 0deg));
-  will-change: transform, opacity;
-  transition:
-    opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.78s cubic-bezier(0.18, 1.26, 0.42, 1);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0) rotate(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transition: none;
-    transform: none;
-  }
-}
 .cine-stage {
   perspective: 1000px;
   cursor: pointer;
@@ -259,35 +240,73 @@
     opacity: 1;
     transform: translate(0) rotate(0);
   }
-}/* Hand-drawn rule under the filter bar (shared InkRule component). */
-.ink-rule {
-  width: 100%;
-  height: 10px;
-  display: block;
-  overflow: visible;
-}
-.ink-rule path {
-  fill: none;
-  stroke: var(--color-foreground);
-  stroke-width: 1.1px;
-  stroke-linecap: round;
-  opacity: 0.16;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200px;
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.ink-rule.is-drawn path {
-  stroke-dashoffset: 0;
-}
-@media (prefers-reduced-motion: reduce) {
-  .ink-rule path {
-    stroke-dashoffset: 0;
-    transition: none;
-  }
 }
 /* In the source this comes after `.meta-row .meta-item`; repeated here to keep that order. */
 @container (width<=250px) {
   .meta-row .meta-glyph {
     display: none;
+  }
+}
+/* Toasts: sonner's default light toaster at bottom-center, as the source mounts it. */
+.gal-toaster {
+  position: fixed;
+  z-index: 999999999;
+  bottom: 24px;
+  left: 50%;
+  width: 356px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 14px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+}
+.gal-toast-item {
+  pointer-events: auto;
+  animation: gal-toast-in 0.4s ease both;
+  transition:
+    transform 0.4s,
+    opacity 0.4s;
+}
+.gal-toast-item[data-leaving="true"] {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.gal-toast {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid #ededed;
+  border-radius: 8px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 4px 12px #0000001a;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+@keyframes gal-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 600px) {
+  .gal-toaster {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    transform: none;
   }
 }
