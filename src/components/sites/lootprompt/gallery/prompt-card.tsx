@@ -286,20 +286,13 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
     if (legendary) resetHolo();
   };
 
-  /** Clicks outside the link/buttons still open the prompt (or the gate). */
+  /** Clicks outside the link/buttons still open the prompt (or the gate).
+   *  Clicks on the link itself are turned into the gate by the chrome for guests. */
   const onStageClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if ((e.target as HTMLElement).closest("a, button, input, textarea, select, [role='button']")) return;
     if (gateCrewOnly(prompt.id)) return;
     navigateTo(href);
-  };
-
-  const onLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (isCrewOnly(prompt.id)) {
-      e.preventDefault();
-      gateCrewOnly(prompt.id);
-    }
   };
 
   const showSteals = showsCount("steals", count);
@@ -338,7 +331,6 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
           <a
             href={href}
             aria-label={`Open ${prompt.title}`}
-            onClick={onLinkClick}
             className="absolute inset-0 z-20 cursor-pointer rounded-[15px] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
           />
         )}

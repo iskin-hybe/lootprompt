@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { promptHref, prompts } from "../data";
-import { SignupDialog } from "./signup-dialog";
+import { AuthModal } from "../chrome/auth-modal";
 
 /** The newest prompt in the vault (the source lists prompts newest first). */
 const newest =
@@ -20,7 +20,7 @@ function SubscribeButton() {
       <button type="button" className="btn-sticker" onClick={() => setSignupOpen(true)}>
         Sign up &amp; subscribe
       </button>
-      {signupOpen ? <SignupDialog onClose={() => setSignupOpen(false)} /> : null}
+      {signupOpen ? <AuthModal onClose={() => setSignupOpen(false)} /> : null}
     </div>
   );
 }

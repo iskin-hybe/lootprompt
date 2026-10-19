@@ -1,26 +1,3 @@
-.thief-avatar-pack {
-  isolation: isolate;
-  border-radius: 999px;
-  flex: none;
-  place-items: center;
-  display: inline-grid;
-  position: relative;
-}
-.thief-avatar-pack img {
-  border-radius: inherit;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.thief-avatar-pack.is-premium:before {
-  content: "";
-  z-index: -1;
-  border-radius: inherit;
-  background: conic-gradient(#d7a52b, #fff1a8, #9fdcff, #ddb0ff, #d7a52b);
-  animation: 7s linear infinite thief-avatar-shimmer;
-  position: absolute;
-  inset: -3px;
-}
 .case-report.is-visible .case-dial {
   animation: 7s ease-in-out infinite alternate case-dial;
 }
@@ -68,20 +45,6 @@
 }
 .case-tile.is-hot {
   animation: 0.7s case-hot;
-}
-[data-offscreen="1"] .thief-avatar-pack:before {
-  animation-play-state: paused !important;
-}
-@media (prefers-reduced-motion: reduce) {
-  .thief-avatar-pack.is-premium:before {
-    animation: none;
-  }
-}
-
-@keyframes thief-avatar-shimmer {
-  to {
-    rotate: 1turn;
-  }
 }
 
 @keyframes case-dial {

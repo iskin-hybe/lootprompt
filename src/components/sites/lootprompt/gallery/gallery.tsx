@@ -3,8 +3,7 @@
 // Filter bar, pills, guest strips and the prompt grid (source: `In()` in the routes chunk,
 // from the sticky filter bar down to the gallery section).
 import { Search } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { flushSync } from "react-dom";
 import { caseNumbers, homeAggregates, legendaryIds, prompts, type Prompt } from "../data";
 import { InkRule } from "../shared/ink-rule";
@@ -35,16 +34,6 @@ const pillClass = (active: boolean) =>
       ? "border-foreground bg-foreground text-[var(--card-surface)]"
       : "border-[var(--paper-line)] text-muted-foreground hover:text-foreground"
   }`;
-
-/** Applies `?category=` from the URL (kept in Suspense so the page stays prerendered). */
-function CategoryFromUrl({ onCategory }: { onCategory: (c: CategoryTab) => void }) {
-  const value = useSearchParams().get("category");
-  useEffect(() => {
-    const match = CATEGORIES.find((c) => c === value);
-    if (match) onCategory(match);
-  }, [value, onCategory]);
-  return null;
-}
 
 /** Hand-inked underline that slides under the active category tab. */
 function TabInk({ style }: { style: CSSProperties }) {
@@ -153,6 +142,14 @@ export function Gallery() {
     const last = Number.MAX_SAFE_INTEGER;
     return filtered.slice().sort((a, b) => (rank.get(a.id) ?? last) - (rank.get(b.id) ?? last));
   }, [filtered, shuffle]);
+
+  // `?category=` is only read when the page loads, like the source's initial state.
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("category");
+    const match = CATEGORIES.find((c) => c === value);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (match) setCategory(match);
+  }, []);
 
   // "/" focuses search.
   useEffect(() => {
@@ -295,9 +292,6 @@ export function Gallery() {
 
   return (
     <>
-      <Suspense fallback={null}>
-        <CategoryFromUrl onCategory={setCategory} />
-      </Suspense>
       <ToastHost />
 
       <section className="filter-bar" aria-label="Filter prompts">

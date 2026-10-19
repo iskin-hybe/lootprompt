@@ -2,9 +2,10 @@
 
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { SignupDialog } from "../daily-vault/signup-dialog";
+import { AuthModal } from "../chrome/auth-modal";
+import { ThiefAvatarPack } from "../chrome/thief-avatar-pack";
 import { heistReport, homeAggregates, promptHref, SITE_ORIGIN, SNAPSHOT_AT } from "../data";
-import { avatarMeta, resolveAvatarStyle, thiefAvatarUri } from "../thieves/thief-avatars";
+import { resolveAvatarStyle } from "../thieves/thief-avatars";
 import {
   count,
   CrimeWave,
@@ -60,28 +61,6 @@ function categoryKey(category: string): string {
     .toLowerCase()
     .replace(/[^a-z]+/g, "_")
     .replace(/^_|_$/g, "");
-}
-
-/** Thief avatar as the source renders it (premium styles get a foil ring). */
-function ThiefAvatar({ seed, style, size }: { seed: string; style: string | null; size: number }) {
-  const premium = avatarMeta(resolveAvatarStyle(style, seed)).tier === "premium";
-  return (
-    <span
-      className={`thief-avatar-pack${premium ? " is-premium" : ""}`}
-      style={{ width: size, height: size }}
-      data-avatar-tier={premium ? "premium" : "common"}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={thiefAvatarUri(seed, style)}
-        alt=""
-        width={size}
-        height={size}
-        draggable={false}
-        decoding="async"
-      />
-    </span>
-  );
 }
 
 /** "The Heist Report" case file: live KPIs with an expandable full report. */
@@ -281,7 +260,11 @@ export function CaseReport() {
                       <p>THIEF OF THE MONTH</p>
                       <span className={`case-stamp ${animate ? "is-active" : ""}`}>AT LARGE</span>
                       <a href={`${SITE_ORIGIN}/h/${encodeURIComponent(wanted.username)}`}>
-                        <ThiefAvatar seed={wanted.avatar_seed} style={wanted.avatar_style} size={64} />
+                        <ThiefAvatarPack
+                          seed={wanted.avatar_seed}
+                          style={resolveAvatarStyle(wanted.avatar_style, wanted.avatar_seed)}
+                          size={64}
+                        />
                         <strong>{wanted.display_name || wanted.username}</strong>
                       </a>
                       <span>
@@ -408,7 +391,7 @@ export function CaseReport() {
         </button>
         <span className="case-hand">{open ? "Close the file" : "Open the case file"}</span>
       </div>
-      {signupOpen ? <SignupDialog onClose={() => setSignupOpen(false)} /> : null}
+      {signupOpen ? <AuthModal onClose={() => setSignupOpen(false)} /> : null}
     </section>
   );
 }
