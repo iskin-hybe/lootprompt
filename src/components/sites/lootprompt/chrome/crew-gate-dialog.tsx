@@ -2,9 +2,9 @@
 
 import { Check, Lock, X } from "lucide-react";
 import { useEffect, useRef, type RefObject } from "react";
-import type { Prompt } from "../data";
 import { CrewAuthForm } from "./auth-modal";
-import { DenizWorkshop } from "./deniz-workshop";
+import { DenizWorkshop } from "../job-board/deniz-workshop";
+import { jobBoard as jobBoardTeaser, type Prompt } from "../data";
 import { BodyPortal } from "./portal";
 import { removeStorage, writeStorage } from "./use-hydrated";
 
@@ -104,7 +104,7 @@ export function CrewGateDialog({
           </button>
           <div className={`crew-gate-poster${jobBoard ? " is-job-board" : ""}`}>
             {jobBoard ? (
-              <DenizWorkshop mini viewBox="120 90 260 190" />
+              <DenizWorkshop job={null} goal={jobBoardTeaser.goal} mini viewBox="120 90 260 190" />
             ) : poster ? (
               // eslint-disable-next-line @next/next/no-img-element -- poster fills the frame via CSS
               <img src={poster} alt={prompt?.title ?? ""} />
