@@ -1,0 +1,40 @@
+/* Medal tints and the one-off gleam sweep (copied from the source stylesheet). */
+.medal-1 {
+  color: #b8892a;
+}
+.medal-2 {
+  color: #8a8d92;
+}
+.medal-3 {
+  color: #a2653a;
+}
+.dark .medal-1 {
+  color: #e6bd63;
+}
+.dark .medal-2 {
+  color: #c3c7cd;
+}
+.dark .medal-3 {
+  color: #d18f5f;
+}
+.medal-shine .medal-gleam {
+  animation: 0.9s ease-out 0.12s both medal-sweep;
+}
+@keyframes medal-sweep {
+  0% {
+    opacity: 0;
+    transform: translate(-130%);
+  }
+  35% {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+    transform: translate(130%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .medal-shine .medal-gleam {
+    animation: none;
+  }
+}

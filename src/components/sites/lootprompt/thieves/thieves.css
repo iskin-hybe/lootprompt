@@ -1,0 +1,57 @@
+/* Thief avatar pack + follow button rules missing from lootprompt.css (copied from the source). */
+.thief-avatar-pack {
+  isolation: isolate;
+  border-radius: 999px;
+  flex: none;
+  place-items: center;
+  display: inline-grid;
+  position: relative;
+}
+.thief-avatar-pack img {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.thief-avatar-pack.is-premium:before {
+  content: "";
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(#d7a52b, #fff1a8, #9fdcff, #ddb0ff, #d7a52b);
+  animation: 7s linear infinite thief-avatar-shimmer;
+  position: absolute;
+  inset: -3px;
+}
+@keyframes thief-avatar-shimmer {
+  to {
+    rotate: 1turn;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .thief-avatar-pack.is-premium:before {
+    animation: none;
+  }
+}
+.thief-follow-wrap {
+  display: inline-flex;
+  position: relative;
+}
+.thief-tail-stamp {
+  z-index: 3;
+  white-space: nowrap;
+  color: var(--destructive);
+  font: 800 0.62rem var(--font-mono);
+  border: 2px solid;
+  padding: 0.1rem 0.3rem;
+  animation: 0.35s cubic-bezier(0.2, 1.7, 0.4, 1) tail-stamp;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translate(-50%) rotate(-7deg);
+}
+@keyframes tail-stamp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%) rotate(-15deg) scale(1.6);
+  }
+}

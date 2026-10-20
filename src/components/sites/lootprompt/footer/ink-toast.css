@@ -1,0 +1,104 @@
+/* Minimal recreation of the source's sonner toaster (bottom-center, light theme). */
+.lp-toaster {
+  position: fixed;
+  z-index: 999999999;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 356px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: 0;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
+    Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
+}
+.lp-toast {
+  --y: translateY(100%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 356px;
+  box-sizing: border-box;
+  padding: 16px;
+  border: 1px solid hsl(0, 0%, 93%);
+  border-radius: 8px;
+  background: #fff;
+  color: hsl(0, 0%, 9%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  outline: 0;
+  opacity: 0;
+  transform: var(--y);
+  touch-action: none;
+  transition:
+    transform 0.4s,
+    opacity 0.4s,
+    height 0.4s,
+    box-shadow 0.2s;
+}
+.lp-toast:focus-visible {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.lp-toast[data-mounted="true"] {
+  --y: translateY(0);
+  opacity: 1;
+}
+.lp-toast[data-removed="true"] {
+  --y: translateY(100%);
+  opacity: 0;
+}
+.lp-toast [data-icon] {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-start;
+  width: 16px;
+  height: 16px;
+  margin-left: -3px;
+  margin-right: 4px;
+}
+.lp-toast [data-icon] svg {
+  flex-shrink: 0;
+  margin-left: -1px;
+}
+.lp-toast [data-content] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.lp-toast [data-title] {
+  font-weight: 500;
+  line-height: 1.5;
+  color: inherit;
+}
+@media (max-width: 600px) {
+  .lp-toaster {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: 100%;
+    transform: none;
+  }
+  .lp-toast {
+    left: 0;
+    right: 0;
+    width: calc(100% - 32px);
+  }
+}
+@media (prefers-reduced-motion) {
+  .lp-toast {
+    transition: none !important;
+  }
+}

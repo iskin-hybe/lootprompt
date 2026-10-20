@@ -1,0 +1,92 @@
+.case-report.is-visible .case-dial {
+  animation: 7s ease-in-out infinite alternate case-dial;
+}
+.case-report.is-visible .case-live i {
+  animation: 1.2s infinite case-blink;
+}
+.case-flipping {
+  animation: 0.12s ease-in case-flip;
+}
+.case-report.is-visible .case-ping {
+  animation: 1.6s infinite case-ping;
+}
+.case-collapse.is-open {
+  grid-template-rows: 1fr;
+}
+.case-collapse:not(.is-open) .case-details {
+  visibility: hidden;
+}
+.case-collapse.is-open .case-details > * {
+  animation: 0.35s both case-rise;
+}
+.case-collapse.is-open .case-details > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.case-collapse.is-open .case-details > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+.case-collapse.is-open .case-details > :nth-child(4) {
+  animation-delay: 0.24s;
+}
+.case-chart-bar.is-peak {
+  background: var(--case-red);
+}
+.case-split.no-wanted {
+  grid-template-columns: 1fr;
+}
+.case-heat-cell.is-peak {
+  background: var(--case-red);
+}
+.case-report.is-visible .case-moon {
+  animation: 3s ease-in-out infinite alternate case-moon;
+}
+.case-radio-container.is-open {
+  display: block;
+}
+.case-tile.is-hot {
+  animation: 0.7s case-hot;
+}
+
+@keyframes case-dial {
+  to {
+    transform: rotate(115deg);
+  }
+}
+
+@keyframes case-flip {
+  50% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes case-ping {
+  to {
+    box-shadow: 0 0 0 9px #0000;
+  }
+}
+
+@keyframes case-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes case-moon {
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes case-hot {
+  to {
+    box-shadow: 0 0 0 12px #0000;
+  }
+  30% {
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--case-red) 50%, transparent);
+  }
+}

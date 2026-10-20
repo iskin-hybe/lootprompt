@@ -1,0 +1,122 @@
+.seat-meter {
+  grid-template-columns: repeat(15, 1fr);
+  gap: 0.28rem;
+  margin: 0.8rem 0;
+  display: grid;
+}
+.seat-meter span {
+  aspect-ratio: 1;
+  border: 1px solid var(--foreground);
+  background: 0 0;
+  border-radius: 999px;
+}
+.seat-meter span.is-filled {
+  background: var(--foreground);
+}
+.seat-meter span[data-pop="true"] {
+  animation: 0.38s cubic-bezier(0.2, 1.7, 0.3, 1) seat-pop;
+}
+.seat-meter.is-near {
+  animation: 1.1s ease-in-out infinite seat-heart;
+}
+.deniz-workshop {
+  border: 1.5px solid var(--foreground);
+  background: var(--paper);
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  box-shadow: 4px 5px 0 var(--paper-line);
+  font-family: var(--font-mono);
+  border-radius: 12px;
+  margin: 1.2rem 0;
+}
+.deniz-workshop.is-mini {
+  height: 120px;
+  max-height: 120px;
+  box-shadow: none;
+  margin: 0.6rem 0;
+}
+@media (width<=760px) {
+  .deniz-workshop {
+    height: 220px;
+    max-height: 220px;
+  }
+  .seat-meter {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seat-meter,
+  .seat-meter span,
+  .deniz-workshop * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+.jp-paper {
+  background: var(--paper);
+  border: 1.5px solid var(--foreground);
+  box-shadow: 6px 7px 0 var(--foreground);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.jp-paper.is-open .jp-details {
+  grid-template-rows: 1fr;
+}
+.jp-paper.is-open .jp-details-inner {
+  border-top: 1px dashed var(--paper-line, var(--border));
+  padding-block: 0.4rem 1.2rem;
+}
+.jp-paper.is-open .jp-open,
+.jp-paper.is-open .jp-works,
+.jp-paper.is-open .jp-done {
+  animation: 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both jp-rise;
+  animation-delay: calc(var(--i, 0) * 70ms + 0.12s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .jp-paper.is-open .jp-open,
+  .jp-paper.is-open .jp-works,
+  .jp-paper.is-open .jp-done {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+}
+.jp-deniz .deniz-workshop {
+  box-shadow: none;
+  background: 0 0;
+  border: 0;
+  margin: 0;
+}
+.jp-paper.is-open .jp-toggle-disc {
+  animation: none;
+  transform: rotate(180deg);
+}
+
+@keyframes seat-pop {
+  0% {
+    background: var(--destructive);
+    transform: scale(0.2);
+  }
+  60% {
+    background: var(--destructive);
+    transform: scale(1.6);
+  }
+  to {
+    background: var(--foreground);
+    transform: scale(1);
+  }
+}
+
+@keyframes seat-heart {
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes jp-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

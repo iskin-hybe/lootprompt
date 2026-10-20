@@ -1,0 +1,14 @@
+/* Ink pad press / done states (rules missing from lootprompt.css). */
+.ink-pad.is-pressed {
+  border-color: var(--foreground);
+  transform: scale(0.96);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .ink-pad.is-pressed {
+    border-color: color-mix(in oklab, var(--foreground) 35%, transparent);
+  }
+}
+.ink-pad.is-done {
+  cursor: default;
+  border-style: dashed;
+}
