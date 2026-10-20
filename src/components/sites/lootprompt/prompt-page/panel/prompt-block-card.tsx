@@ -7,6 +7,7 @@ import { stampAngle } from "../../gallery/lib";
 import { stealPrompt, type StealStamp } from "../../gallery/use-steal";
 import type { PromptBlock } from "../../prompt-details";
 import { parseAnatomy } from "./anatomy";
+import { flyLootToBag } from "./loot-flight";
 import { PromptAnatomy } from "./prompt-anatomy";
 
 const COPIED_MS = 1600;
@@ -44,6 +45,7 @@ export function PromptBlockCard({
     } catch {
       return;
     }
+    void flyLootToBag().catch(() => {});
     setCopied(true);
     timers.current.push(window.setTimeout(() => setCopied(false), COPIED_MS));
     const key = Date.now();

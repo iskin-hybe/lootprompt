@@ -4,6 +4,7 @@ import { Check, Copy } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { InkStamp, ReferenceChip, useMounted } from "../../gallery/card-parts";
 import { usePromptPage } from "../context";
+import { flyLootToBag } from "./loot-flight";
 import { flyLootSlip } from "./loot-slip";
 import { PromptBlockCard } from "./prompt-block-card";
 import { composeRemix, isRemixed, parseRemix, type RemixValues } from "./remix";
@@ -11,6 +12,16 @@ import { RemixText } from "./remix-text";
 import "./panel.css";
 
 const PROMPT_FALLBACK = "Prompt";
+/** A remembered steal origin older than this belongs to some other click. */
+const ORIGIN_MAX_AGE_MS = 2000;
+
+interface StealOrigin {
+  /** Box of the focused element when the steal was triggered (the slip starts there). */
+  rect: DOMRect;
+  /** Its centre, unless that was the page body (the loot flight then looks for a hovered button). */
+  point: { x: number; y: number } | null;
+  at: number;
+}
 
 /**
  * The prompt panel of /prompt/:id (source route `Xe`, from the "Prompt" section through
@@ -72,14 +83,40 @@ function MainPrompt() {
     setComposedPrompt(composed, remixed);
   }, [composed, remixed, setComposedPrompt]);
 
-  // Every steal of this prompt (button, C key, mini bar) sends a slip of it to the vault pill,
-  // starting from the focused control as the source does.
+  // Every steal of this prompt (button, C key, mini bar) sends a slip of it to the vault pill
+  // and ink drops to the bag. The source measures the focused control before the steal
+  // re-renders it ("Stolen" is narrower), so its box is remembered at click / keypress time.
+  const origin = useRef<StealOrigin | null>(null);
+  useEffect(() => {
+    const remember = () => {
+      const active = document.activeElement;
+      if (!(active instanceof HTMLElement)) return;
+      const rect = active.getBoundingClientRect();
+      const point =
+        active !== document.body && rect.width > 0 && rect.height > 0
+          ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+          : null;
+      origin.current = { rect, point, at: Date.now() };
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === "c" && !event.metaKey && !event.ctrlKey && !event.altKey) remember();
+    };
+    window.addEventListener("click", remember, true);
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => {
+      window.removeEventListener("click", remember, true);
+      window.removeEventListener("keydown", onKeyDown, true);
+    };
+  }, []);
+
   const stampKey = stamp?.key;
   useEffect(() => {
     if (stampKey === undefined) return;
+    const recent = origin.current && Date.now() - origin.current.at < ORIGIN_MAX_AGE_MS ? origin.current : null;
     const active = document.activeElement;
-    const from = active instanceof HTMLElement ? active : stealButton.current;
+    const from = recent?.rect ?? (active instanceof HTMLElement ? active : stealButton.current);
     void flyLootSlip(from, composedRef.current).catch(() => {});
+    void (recent?.point ? flyLootToBag(recent.point) : flyLootToBag()).catch(() => {});
   }, [stampKey]);
 
   return (
