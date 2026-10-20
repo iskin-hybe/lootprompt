@@ -1,4 +1,5 @@
 import type { Prompt } from "../data";
+import { ToastHost } from "../gallery/toast";
 import type { PromptDetail } from "../prompt-details";
 import { PromptBottom } from "./bottom/prompt-bottom";
 import { PromptKeepBrowsing } from "./bottom/keep-browsing";
@@ -13,6 +14,7 @@ import "./prompt-page.css";
 export function PromptPage({ prompt, detail }: { prompt: Prompt; detail: PromptDetail }) {
   return (
     <PromptPageProvider prompt={prompt} detail={detail}>
+      <ToastHost />
       <main className="paper-grid min-h-screen text-foreground">
         <PromptReadingChrome />
         <div className="mx-auto w-full max-w-3xl px-5 pb-24 pt-10 sm:px-6 sm:pt-14">

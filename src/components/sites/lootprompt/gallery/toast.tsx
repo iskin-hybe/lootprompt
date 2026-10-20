@@ -4,6 +4,7 @@
 // plain toasts (save heart) and unstyled "ink" toasts (steals).
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import "./toast.css";
 
 type ToastKind = "plain" | "ink";
 

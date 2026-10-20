@@ -1,0 +1,63 @@
+/* Toasts: sonner's default light toaster at bottom-center, as the source mounts it. */
+.gal-toaster {
+  position: fixed;
+  z-index: 999999999;
+  bottom: 24px;
+  left: 50%;
+  width: 356px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 14px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+}
+.gal-toast-item {
+  pointer-events: auto;
+  animation: gal-toast-in 0.4s ease both;
+  transition:
+    transform 0.4s,
+    opacity 0.4s;
+}
+.gal-toast-item[data-leaving="true"] {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.gal-toast {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid #ededed;
+  border-radius: 8px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 4px 12px #0000001a;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+@keyframes gal-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 600px) {
+  .gal-toaster {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    transform: none;
+  }
+}
