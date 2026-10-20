@@ -67,7 +67,6 @@ export function StoryHint({
       // treat blocked storage as "not seen"
     }
     if (done) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- read once from matchMedia on mount
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const target = targetRef.current;
     if (!target) return;

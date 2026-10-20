@@ -39,13 +39,18 @@ export function PromptBlockCard({
     return () => pending.forEach((t) => window.clearTimeout(t));
   }, []);
 
+  // Ink drops leave from the button as re-rendered ("Stolen"), as on the source.
+  const stampKey = stamp?.key;
+  useEffect(() => {
+    if (stampKey !== undefined) void flyLootToBag().catch(() => {});
+  }, [stampKey]);
+
   const steal = useCallback(async () => {
     try {
       await stealPrompt({ id: promptId, title: promptTitle, prompt: block.text });
     } catch {
       return;
     }
-    void flyLootToBag().catch(() => {});
     setCopied(true);
     timers.current.push(window.setTimeout(() => setCopied(false), COPIED_MS));
     const key = Date.now();

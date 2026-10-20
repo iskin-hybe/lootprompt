@@ -26,7 +26,7 @@ function center(el: Element): Point {
 }
 
 /** Where the steal happened: the focused control, a hovered button, or the viewport centre. */
-export function lootOrigin(): Point {
+function lootOrigin(): Point {
   const active = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   if (active?.closest(".palette-panel")) {
     const row = document.querySelector(".palette-panel [data-index] button:hover");
@@ -95,8 +95,7 @@ async function blinkBag(element: HTMLElement | null): Promise<void> {
     .finished.catch(() => {});
 }
 
-/** Pass `origin` when the steal control has already re-rendered since the steal. */
-export async function flyLootToBag(origin: Point = lootOrigin()): Promise<void> {
+export async function flyLootToBag(): Promise<void> {
   if (window.location.pathname.startsWith("/vault-3d") || running >= MAX_CONCURRENT) return;
   const bag = bagTarget();
   if (prefersReducedMotion()) {
@@ -111,6 +110,7 @@ export async function flyLootToBag(origin: Point = lootOrigin()): Promise<void> 
 
   running += 1;
   const layer = flightOverlay();
+  const origin = lootOrigin();
   const count = 10 + Math.floor(Math.random() * 5);
   const drops: HTMLSpanElement[] = [];
   const flights: Animation[] = [];

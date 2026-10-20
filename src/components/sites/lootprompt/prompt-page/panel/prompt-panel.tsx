@@ -15,14 +15,6 @@ const PROMPT_FALLBACK = "Prompt";
 /** A remembered steal origin older than this belongs to some other click. */
 const ORIGIN_MAX_AGE_MS = 2000;
 
-interface StealOrigin {
-  /** Box of the focused element when the steal was triggered (the slip starts there). */
-  rect: DOMRect;
-  /** Its centre, unless that was the page body (the loot flight then looks for a hovered button). */
-  point: { x: number; y: number } | null;
-  at: number;
-}
-
 /**
  * The prompt panel of /prompt/:id (source route `Xe`, from the "Prompt" section through
  * "References"): the main prompt with its steal button and remix tokens, every other
@@ -84,19 +76,14 @@ function MainPrompt() {
   }, [composed, remixed, setComposedPrompt]);
 
   // Every steal of this prompt (button, C key, mini bar) sends a slip of it to the vault pill
-  // and ink drops to the bag. The source measures the focused control before the steal
-  // re-renders it ("Stolen" is narrower), so its box is remembered at click / keypress time.
-  const origin = useRef<StealOrigin | null>(null);
+  // and ink drops to the bag. The source measures the slip's start before the steal
+  // re-renders the focused control ("Stolen" is narrower), so that box is remembered at
+  // click / keypress time; the drops leave from the control as re-rendered, as there.
+  const origin = useRef<{ rect: DOMRect; at: number } | null>(null);
   useEffect(() => {
     const remember = () => {
       const active = document.activeElement;
-      if (!(active instanceof HTMLElement)) return;
-      const rect = active.getBoundingClientRect();
-      const point =
-        active !== document.body && rect.width > 0 && rect.height > 0
-          ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
-          : null;
-      origin.current = { rect, point, at: Date.now() };
+      if (active instanceof HTMLElement) origin.current = { rect: active.getBoundingClientRect(), at: Date.now() };
     };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key.toLowerCase() === "c" && !event.metaKey && !event.ctrlKey && !event.altKey) remember();
@@ -112,11 +99,11 @@ function MainPrompt() {
   const stampKey = stamp?.key;
   useEffect(() => {
     if (stampKey === undefined) return;
-    const recent = origin.current && Date.now() - origin.current.at < ORIGIN_MAX_AGE_MS ? origin.current : null;
+    const recent = origin.current && Date.now() - origin.current.at < ORIGIN_MAX_AGE_MS ? origin.current.rect : null;
     const active = document.activeElement;
-    const from = recent?.rect ?? (active instanceof HTMLElement ? active : stealButton.current);
+    const from = recent ?? (active instanceof HTMLElement ? active : stealButton.current);
     void flyLootSlip(from, composedRef.current).catch(() => {});
-    void (recent?.point ? flyLootToBag(recent.point) : flyLootToBag()).catch(() => {});
+    void flyLootToBag().catch(() => {});
   }, [stampKey]);
 
   return (
