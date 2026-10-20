@@ -1,0 +1,21 @@
+/* Source rules the prompt panel needs that no stylesheet on this route loads
+   (gallery.css carries the same rules for the homepage only). */
+.paper-jolt {
+  animation: 0.12s steps(2, end) 2 paper-jolt;
+}
+@keyframes paper-jolt {
+  0% {
+    translate: 0;
+  }
+  50% {
+    translate: 1px -1px;
+  }
+  to {
+    translate: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper-jolt {
+    animation: none;
+  }
+}
