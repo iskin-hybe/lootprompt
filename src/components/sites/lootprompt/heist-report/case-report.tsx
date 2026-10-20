@@ -1,10 +1,12 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthModal } from "../chrome/auth-modal";
 import { ThiefAvatarPack } from "../chrome/thief-avatar-pack";
-import { heistReport, homeAggregates, promptHref, SITE_ORIGIN, SNAPSHOT_AT } from "../data";
+import { heistReport, homeAggregates, SITE_ORIGIN, SNAPSHOT_AT } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import { resolveAvatarStyle } from "../thieves/thief-avatars";
 import {
   count,
@@ -278,7 +280,7 @@ export function CaseReport() {
                   <div className="case-section">
                     <h3>Hot loot this week</h3>
                     {report.hot_loot.map((loot, i) => (
-                      <a key={loot.id} href={promptHref(loot.id)} className="case-loot">
+                      <Link key={loot.id} href={localPromptHref(loot.id)} prefetch={false} className="case-loot">
                         <span>
                           {i + 1}. {loot.title}
                         </span>
@@ -289,7 +291,7 @@ export function CaseReport() {
                             style={{ width: `${(count(loot.n) / hotMax) * 100}%` }}
                           />
                         </span>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                   <div className="case-section">

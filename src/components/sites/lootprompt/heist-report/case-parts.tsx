@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { promptHref, type HeistReport } from "../data";
+import { type HeistReport } from "../data";
+import { localPromptHref } from "../shared/member-view";
 
 export type DailyRow = HeistReport["daily"][number];
 export type DailyField = "steals" | "visits" | "new_thieves";
@@ -304,10 +306,10 @@ export function PoliceRadio({
     <div className="case-radio">
       <span className="case-radio-tag">RADIO</span>
       {item ? (
-        <a href={promptHref(item.id)} className="case-radio-link" title={line}>
+        <Link href={localPromptHref(item.id)} prefetch={false} className="case-radio-link" title={line}>
           {line.slice(0, shownChars)}
           <span className="case-caret" />
-        </a>
+        </Link>
       ) : (
         <span>{line}</span>
       )}

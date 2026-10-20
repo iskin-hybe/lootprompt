@@ -1,0 +1,14 @@
+/* The tutorial GIFs are served as MP4 loops (`video.doc-gif`) that take the source's
+   `.tutorial-prose img` rules. Their width/height attributes carry the GIF's natural size;
+   content-box sizing makes the box match an <img> of that size (border outside it). */
+.tutorial-prose video.doc-gif {
+  box-sizing: content-box;
+  border: 1px solid var(--paper-line);
+  border-radius: 10px;
+  max-width: calc(100% - 2px);
+  margin: 1rem 0;
+}
+.tutorial-prose .doc-cta video.doc-gif {
+  width: 54px;
+  margin: 0 auto 0.75rem;
+}

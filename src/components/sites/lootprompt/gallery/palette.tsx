@@ -2,8 +2,10 @@
 
 // ⌘K command palette (source: command-palette chunk).
 import { BriefcaseBusiness, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SITE_ORIGIN, promptHref, prompts, type Prompt } from "../data";
+import { SITE_ORIGIN, prompts, type Prompt } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import { InkStamp } from "./card-parts";
 import { cleanPrompt, navigateTo, stampAngle } from "./lib";
 import { gateCrewOnly } from "./stores";
@@ -33,6 +35,7 @@ function rank(prompt: Prompt, query: string): number | null {
 }
 
 export function CommandPalette({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const router = useRouter();
   const [open, setOpen] = useState(defaultOpen);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
@@ -106,7 +109,7 @@ export function CommandPalette({ defaultOpen = false }: { defaultOpen?: boolean 
 
   const openPrompt = (prompt: Prompt) => {
     setOpen(false);
-    if (!gateCrewOnly(prompt.id)) navigateTo(promptHref(prompt.id));
+    if (!gateCrewOnly(prompt.id)) router.push(localPromptHref(prompt.id));
   };
 
   const openJobs = () => {

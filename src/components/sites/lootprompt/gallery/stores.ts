@@ -1,10 +1,12 @@
 "use client";
 
-// Per-visitor state the source keeps in this browser for signed-out guests.
+// Per-visitor state the source keeps in this browser (signed-out guests, and the
+// clone's member view, which has no account behind it).
 // Keys and window events match lootprompt.com so state carries over.
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { homeAggregates } from "../data";
 import { openCrewGate } from "../shared/crew-gate";
+import { MEMBER_VIEW } from "../shared/member-view";
 import { isNight } from "./lib";
 
 function readJson<T>(storage: () => Storage, key: string, fallback: T): T {
@@ -162,6 +164,7 @@ export function useCollection() {
 /* ---------- Guest gate: which prompts a signed-out visitor may open ---------- */
 
 const ENTRY_POSTS_KEY = "lp-entry-posts";
+const PROMPT_PATH = /^\/prompt\/([^/?#]+)\/?$/;
 
 /** Prompts a guest landed on directly this session stay open to them. */
 function entryPosts(): string[] {
@@ -169,9 +172,33 @@ function entryPosts(): string[] {
   return Array.isArray(list) ? list.filter((e): e is string => typeof e === "string") : [];
 }
 
-/** Everything else is crew-only for guests (this clone always browses signed out). */
+let entryRecorded = false;
+
+/** Remembers the prompt this tab's first page load opened (source `Ng`). */
+function recordEntryPost(): void {
+  if (entryRecorded) return;
+  entryRecorded = true;
+  let href = window.location.href;
+  try {
+    const [nav] = performance.getEntriesByType("navigation");
+    if (nav?.name) href = nav.name;
+  } catch {
+    // keep the current URL
+  }
+  const match = PROMPT_PATH.exec(new URL(href, window.location.origin).pathname);
+  if (!match?.[1]) return;
+  const id = decodeURIComponent(match[1]);
+  const posts = entryPosts();
+  if (!posts.includes(id)) writeJson(session, ENTRY_POSTS_KEY, [...posts, id].slice(-50));
+}
+
+/**
+ * Guests may only open the prompt they landed on; everything else is crew-only.
+ * Members (this clone's view, see MEMBER_VIEW) open every prompt.
+ */
 export function isCrewOnly(id: string): boolean {
-  if (typeof window === "undefined") return false;
+  if (MEMBER_VIEW || typeof window === "undefined") return false;
+  recordEntryPost();
   return !entryPosts().includes(id);
 }
 

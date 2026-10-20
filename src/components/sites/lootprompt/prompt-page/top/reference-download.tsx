@@ -21,7 +21,7 @@ function videoExtension(path: string): "mov" | "mp4" {
 }
 
 /** `lootprompt-<title>-reference[-n].<ext>` (source `Oe`). */
-export function referenceFilename(title: string, index: number, ext: string): string {
+function referenceFilename(title: string, index: number, ext: string): string {
   return `lootprompt-${slugify(title)}-reference${index > 0 ? `-${index + 1}` : ""}.${ext}`;
 }
 

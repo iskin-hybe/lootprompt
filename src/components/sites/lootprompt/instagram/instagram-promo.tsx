@@ -1,15 +1,10 @@
 "use client";
 
 import { Heart, Play } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import {
-  INSTAGRAM_HANDLE,
-  INSTAGRAM_URL,
-  homeAggregates,
-  promptHref,
-  prompts,
-  type Prompt,
-} from "../data";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL, homeAggregates, prompts, type Prompt } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import { InstagramGlyph } from "./instagram-glyph";
 import "./instagram.css";
 
@@ -223,8 +218,9 @@ export function InstagramPromo() {
 
         <div ref={frameRef} className="ig-promo-frame">
           {current ? (
-            <a
-              href={promptHref(current.id)}
+            <Link
+              href={localPromptHref(current.id)}
+              prefetch={false}
               className="ig-reel-card block"
               aria-label={`Open ${current.title}`}
             >
@@ -248,7 +244,7 @@ export function InstagramPromo() {
                   <Play className="size-4" />
                 </span>
               ) : null}
-            </a>
+            </Link>
           ) : (
             <div className="ig-reel-card ig-reel-empty">
               <span className="font-ui text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground">

@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { SITE_ORIGIN, homeAggregates, promptHref, prompts, type Category } from "../data";
+import { SITE_ORIGIN, homeAggregates, prompts, type Category } from "../data";
 import { InstagramIconLink } from "../instagram/instagram-glyph";
 import { LazyMount } from "../shared/lazy-mount";
+import { localPromptHref } from "../shared/member-view";
 import { InkPad } from "./ink-pad";
 import { InstallAppButton } from "./install-app-button";
 
@@ -73,9 +74,9 @@ export function SiteFooter() {
           <ul className={LIST}>
             {mostStolen.map((prompt) => (
               <li key={prompt.id}>
-                <a href={promptHref(prompt.id)} className={`block truncate ${LINK}`}>
+                <Link href={localPromptHref(prompt.id)} prefetch={false} className={`block truncate ${LINK}`}>
                   {prompt.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
