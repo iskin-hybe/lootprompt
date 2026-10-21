@@ -61,8 +61,8 @@ function cssFamily(variable: string, fallback: string): string {
 }
 
 /**
- * The page loads Inter Tight and Caveat through next/font, which registers them
- * under generated family names; canvas text needs those exact names.
+ * Canvas text uses the same family lists as the page, read from the `--font-*`
+ * variables in fonts.css (each family plus its metric-matched fallback).
  */
 export function storyFonts(): { ui: string; hand: string } {
   return {

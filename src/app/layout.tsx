@@ -1,31 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Alex_Brush, Caveat, Cormorant_Garamond, Inter_Tight } from "next/font/google";
+import { preload } from "react-dom";
 import { siteOrigin } from "@/components/sites/lootprompt/site-origin";
 import "./globals.css";
 
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
-});
-
-const alexBrush = Alex_Brush({
-  variable: "--font-alex-brush",
-  subsets: ["latin", "latin-ext"],
-  weight: "400",
-});
+// Fonts are self-hosted (scripts/lootprompt/fetch-fonts.py) so builds never depend on
+// Google Fonts; the latin subsets are preloaded, as next/font/google did.
+const PRELOADED_FONTS = ["inter-tight", "cormorant-garamond", "caveat", "alex-brush"].flatMap((slug) =>
+  ["latin", "latin-ext"].map((subset) => `/sites/lootprompt/fonts/${slug}-${subset}.woff2`),
+);
 
 const origin = siteOrigin();
 
@@ -59,12 +41,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  for (const href of PRELOADED_FONTS) preload(href, { as: "font", type: "font/woff2", crossOrigin: "" });
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${interTight.variable} ${cormorant.variable} ${caveat.variable} ${alexBrush.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: heroIntroScript }} />
