@@ -2,8 +2,9 @@
 
 import { ChevronDown, Moon, UserPlus } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
-import { SITE_ORIGIN, thievesBoard, type Thief, type ThiefPeriod } from "../data";
+import { thievesBoard, type Thief, type ThiefPeriod } from "../data";
 import { AuthModal } from "../chrome/auth-modal";
+import { thiefHref } from "../shared/member-view";
 import { CrownHeistCanvas } from "./crown-heist-canvas";
 import { ThiefAvatar } from "./thief-avatar";
 import { ThiefBadges } from "./thief-badges";
@@ -22,10 +23,6 @@ const GHOST_SM = `${BUTTON_BASE} hover:bg-accent hover:text-accent-foreground h-
 const GHOST_EXPAND =
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-ui text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 thief-expand";
 const EDITORIAL_SM = `${BUTTON_BASE} border border-primary bg-primary text-primary-foreground shadow-none hover:border-accent hover:bg-accent hover:text-accent-foreground h-8 rounded-sm px-3 text-xs thief-follow`;
-
-function thiefHref(username: string): string {
-  return `${SITE_ORIGIN}/h/${encodeURIComponent(username)}`;
-}
 
 function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -4,10 +4,10 @@
 import { BriefcaseBusiness, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SITE_ORIGIN, prompts, type Prompt } from "../data";
+import { prompts, type Prompt } from "../data";
 import { localPromptHref } from "../shared/member-view";
 import { InkStamp } from "./card-parts";
-import { cleanPrompt, navigateTo, stampAngle } from "./lib";
+import { cleanPrompt, stampAngle } from "./lib";
 import { gateCrewOnly } from "./stores";
 import { stealPrompt, type StealStamp } from "./use-steal";
 
@@ -114,7 +114,7 @@ export function CommandPalette({ defaultOpen = false }: { defaultOpen?: boolean 
 
   const openJobs = () => {
     setOpen(false);
-    navigateTo(`${SITE_ORIGIN}/jobs`);
+    router.push("/jobs");
   };
 
   return (

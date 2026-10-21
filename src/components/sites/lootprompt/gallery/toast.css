@@ -1,63 +1,171 @@
-/* Toasts: sonner's default light toaster at bottom-center, as the source mounts it. */
-.gal-toaster {
+/*
+ * sonner 2's stylesheet (the source injects it at runtime), trimmed to what this toaster
+ * uses: bottom-center position, light theme, plain and custom toasts, no swiping.
+ * Kept unlayered like the injected original, so it wins over the Tailwind utilities that
+ * shadcn's wrapper adds; those only show on unstyled (custom) toasts.
+ */
+[data-sonner-toaster] {
   position: fixed;
-  z-index: 999999999;
-  bottom: 24px;
-  left: 50%;
-  width: 356px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 14px;
-  transform: translateX(-50%);
-  pointer-events: none;
+  width: var(--width);
   font-family:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif;
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --gray4: hsl(0, 0%, 93%);
+  --gray12: hsl(0, 0%, 9%);
+  --border-radius: 8px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  outline: 0;
+  z-index: 999999999;
+  transition: transform 0.4s ease;
 }
-.gal-toast-item {
-  pointer-events: auto;
-  animation: gal-toast-in 0.4s ease both;
+[data-sonner-toaster][data-x-position="center"] {
+  left: 50%;
+  transform: translateX(-50%);
+}
+[data-sonner-toaster][data-y-position="bottom"] {
+  bottom: var(--offset-bottom);
+}
+[data-sonner-toaster][data-sonner-theme="light"] {
+  --normal-bg: #fff;
+  --normal-border: var(--gray4);
+  --normal-text: var(--gray12);
+}
+[data-sonner-toast] {
+  --y: translateY(100%);
+  --lift-amount: calc(var(--lift) * var(--gap));
+  z-index: var(--z-index);
+  position: absolute;
+  opacity: 0;
+  transform: var(--y);
+  touch-action: none;
   transition:
     transform 0.4s,
-    opacity 0.4s;
+    opacity 0.4s,
+    height 0.4s,
+    box-shadow 0.2s;
+  box-sizing: border-box;
+  outline: 0;
+  overflow-wrap: anywhere;
 }
-.gal-toast-item[data-leaving="true"] {
-  opacity: 0;
-  transform: translateY(100%);
-}
-.gal-toast {
+[data-sonner-toast][data-styled="true"] {
+  padding: 16px;
+  background: var(--normal-bg);
+  border: 1px solid var(--normal-border);
+  color: var(--normal-text);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: var(--width);
+  font-size: 13px;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 16px;
-  border: 1px solid #ededed;
-  border-radius: 8px;
-  background: #fff;
-  color: #171717;
-  box-shadow: 0 4px 12px #0000001a;
-  font-size: 13px;
+}
+[data-sonner-toast]:focus-visible {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+[data-sonner-toast][data-y-position="bottom"] {
+  bottom: 0;
+  --y: translateY(100%);
+  --lift: -1;
+  --lift-amount: calc(var(--lift) * var(--gap));
+}
+[data-sonner-toast][data-styled="true"] [data-title] {
   font-weight: 500;
   line-height: 1.5;
+  color: inherit;
 }
-@keyframes gal-toast-in {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+[data-sonner-toast][data-styled="true"] [data-content] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* Keeps the hover alive across the gaps and while a toast leaves. */
+[data-sonner-toast][data-swiping="false"][data-removed="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: scaleY(2);
+}
+[data-sonner-toast][data-expanded="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: calc(var(--gap) + 1px);
+  bottom: 100%;
+  width: 100%;
+}
+[data-sonner-toast][data-mounted="true"] {
+  --y: translateY(0);
+  opacity: 1;
+}
+/* Collapsed stack: older toasts shrink 5% per step and peek out above the front one. */
+[data-sonner-toast][data-expanded="false"][data-front="false"] {
+  --scale: var(--toasts-before) * 0.05 + 1;
+  --y: translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));
+  height: var(--front-toast-height);
+}
+[data-sonner-toast] > * {
+  transition: opacity 0.4s;
+}
+[data-sonner-toast][data-expanded="false"][data-front="false"][data-styled="true"] > * {
+  opacity: 0;
+}
+[data-sonner-toast][data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+[data-sonner-toast][data-mounted="true"][data-expanded="true"] {
+  --y: translateY(calc(var(--lift) * var(--offset)));
+  height: var(--initial-height);
+}
+[data-sonner-toast][data-removed="true"][data-front="true"][data-swipe-out="false"] {
+  --y: translateY(calc(var(--lift) * -100%));
+  opacity: 0;
+}
+[data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="true"] {
+  --y: translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));
+  opacity: 0;
+}
+[data-sonner-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="false"] {
+  --y: translateY(40%);
+  opacity: 0;
+  transition:
+    transform 0.5s,
+    opacity 0.2s;
+}
+[data-sonner-toast][data-removed="true"][data-front="false"]::before {
+  height: calc(var(--initial-height) + 20%);
 }
 @media (max-width: 600px) {
-  .gal-toaster {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-    width: auto;
+  [data-sonner-toaster] {
+    position: fixed;
+    right: var(--mobile-offset-right);
+    left: var(--mobile-offset-left);
+    width: 100%;
+  }
+  [data-sonner-toaster] [data-sonner-toast] {
+    left: 0;
+    right: 0;
+    width: calc(100% - var(--mobile-offset-left) * 2);
+  }
+  [data-sonner-toaster][data-y-position="bottom"] {
+    bottom: var(--mobile-offset-bottom);
+  }
+  [data-sonner-toaster][data-x-position="center"] {
+    left: var(--mobile-offset-left);
+    right: var(--mobile-offset-right);
     transform: none;
+  }
+}
+@media (prefers-reduced-motion) {
+  [data-sonner-toast],
+  [data-sonner-toast] > * {
+    transition: none !important;
+    animation: none !important;
   }
 }

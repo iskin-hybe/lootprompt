@@ -177,7 +177,3 @@ export function caseNumbers(list: Prompt[] = prompts): Map<string, number> {
       .map((p, i) => [p.id, i + 1]),
   );
 }
-
-export function promptHref(id: string): string {
-  return `${SITE_ORIGIN}/prompt/${id}`;
-}

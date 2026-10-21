@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
+import { inLandingView } from "./media-anchor";
 import type { StoryPrompt } from "./story/story-card";
 
 /** localStorage flag: the hint was dismissed or used, never show it again. */
@@ -31,8 +32,8 @@ function loadPoster(url: string | null): Promise<HTMLImageElement | null> {
 
 /**
  * "NEW · Your prompt as a story video" popover above the Save-as-story button
- * (source `z`). Opens 1.2s after the button first scrolls into view, with a live
- * preview of the story.
+ * (source `z`). Opens 1.2s after the button is first on screen (on landing, as the
+ * source measures it, or once scrolled into view), with a live preview of the story.
  */
 export function StoryHint({
   targetRef,
@@ -71,10 +72,16 @@ export function StoryHint({
     const target = targetRef.current;
     if (!target) return;
     let timer = 0;
+    const startTimer = () => {
+      if (!timer) timer = window.setTimeout(() => setOpen(true), 1200);
+    };
+    // The source's first observation sees the button as the page lands, before its
+    // media card takes up room (see `inLandingView`).
+    if (inLandingView(target)) startTimer();
     const observer = new IntersectionObserver(([entry]) => {
       const visible = !!entry?.isIntersecting;
       setTargetVisible(visible);
-      if (visible && !timer) timer = window.setTimeout(() => setOpen(true), 1200);
+      if (visible) startTimer();
     });
     observer.observe(target);
     return () => {

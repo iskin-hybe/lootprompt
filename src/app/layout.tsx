@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Alex_Brush, Caveat, Cormorant_Garamond, Inter_Tight } from "next/font/google";
+import { siteOrigin } from "@/components/sites/lootprompt/site-origin";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -26,19 +27,21 @@ const alexBrush = Alex_Brush({
   weight: "400",
 });
 
+const origin = siteOrigin();
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lootprompt.com"),
+  metadataBase: new URL(origin),
   title: "Prompts by Deniz Akkabak — AI Prompt Database",
   description:
     "Curated high-quality AI prompts for creatives and developers, organized by video, photo and audio.",
   authors: [{ name: "Deniz Akkabak" }],
-  alternates: { canonical: "https://lootprompt.com/" },
+  alternates: { canonical: `${origin}/` },
   openGraph: {
     title: "Prompts by Deniz Akkabak — AI Prompt Database",
     description:
       "Curated high-quality AI prompts for creatives and developers, organized by video, photo and audio.",
     type: "website",
-    url: "https://lootprompt.com/",
+    url: `${origin}/`,
   },
   twitter: { card: "summary_large_image" },
 };

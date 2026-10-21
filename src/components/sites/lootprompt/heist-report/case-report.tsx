@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthModal } from "../chrome/auth-modal";
 import { ThiefAvatarPack } from "../chrome/thief-avatar-pack";
-import { heistReport, homeAggregates, SITE_ORIGIN, SNAPSHOT_AT } from "../data";
-import { localPromptHref } from "../shared/member-view";
+import { heistReport, homeAggregates, SNAPSHOT_AT } from "../data";
+import { localPromptHref, thiefHref } from "../shared/member-view";
 import { resolveAvatarStyle } from "../thieves/thief-avatars";
 import {
   count,
@@ -261,7 +261,7 @@ export function CaseReport() {
                       <span className="case-wanted-title">WANTED</span>
                       <p>THIEF OF THE MONTH</p>
                       <span className={`case-stamp ${animate ? "is-active" : ""}`}>AT LARGE</span>
-                      <a href={`${SITE_ORIGIN}/h/${encodeURIComponent(wanted.username)}`}>
+                      <a href={thiefHref(wanted.username)}>
                         <ThiefAvatarPack
                           seed={wanted.avatar_seed}
                           style={resolveAvatarStyle(wanted.avatar_style, wanted.avatar_seed)}

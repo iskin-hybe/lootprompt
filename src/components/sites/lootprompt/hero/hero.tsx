@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SITE_ORIGIN } from "../data";
 import { HeroSignature } from "./hero-signature";
 import { InstagramLink } from "./instagram-link";
 import { NightMoon } from "./night-moon";
@@ -84,7 +83,7 @@ export function Hero() {
       </div>
       <div className="hero-fade hero-fade-late mt-8 flex items-center gap-4">
         <a
-          href={`${SITE_ORIGIN}/koleksiyonum`}
+          href="/koleksiyonum"
           className="font-ui text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground"
         >
           My Collection

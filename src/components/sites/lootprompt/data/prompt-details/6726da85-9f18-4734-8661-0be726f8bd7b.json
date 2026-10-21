@@ -3,7 +3,6 @@
  "pipelineInfo": "Format 9:16 · 20s · One shot · Platform invideo",
  "invideoUrl": "https://invideo.io/i/DENIZ-ig",
  "reelUrl": null,
- "ogImage": null,
  "promptBlocks": [
   {
    "label": "Prompt 1",

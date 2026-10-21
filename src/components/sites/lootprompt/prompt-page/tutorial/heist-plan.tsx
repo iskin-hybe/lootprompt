@@ -2,6 +2,7 @@
 
 import { ListOrdered } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { flushSync } from "react-dom";
 import { prefersReducedMotion } from "../../gallery/lib";
 
 const PLAN_TITLE = "The plan for this heist";
@@ -23,6 +24,62 @@ function planAnchorId(label: string, index: number): string {
   return `plan-${index + 1}${slug ? `-${slug}` : ""}`;
 }
 
+/** Frames without scroll movement that count as "the scroll has come to rest". */
+const SETTLE_FRAMES = 8;
+const MAX_REALIGNS = 6;
+const FOLLOW_TIMEOUT_MS = 6000;
+const USER_SCROLL_EVENTS = ["wheel", "touchstart", "pointerdown", "keydown"] as const;
+
+/**
+ * Scrolls a heading to its scroll margin (`.doc-anchor`) the way the source does, then keeps
+ * it there. The article's lazy images reserve no space, so the ones the scroll passes load
+ * and push the heading down by hundreds of pixels; each time the page comes to rest away from
+ * the heading it scrolls again. Any user scroll input ends the follow-up, as does the
+ * returned function.
+ */
+function scrollToHeading(target: HTMLElement): () => void {
+  const behavior: ScrollBehavior = prefersReducedMotion() ? "auto" : "smooth";
+  const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const startedAt = performance.now();
+  let frame = 0;
+  let lastY = Number.NaN;
+  let stillFrames = 0;
+  let realigns = 0;
+
+  const stop = () => {
+    cancelAnimationFrame(frame);
+    for (const type of USER_SCROLL_EVENTS) window.removeEventListener(type, stop, true);
+  };
+
+  const tick = () => {
+    const y = window.scrollY;
+    stillFrames = y === lastY ? stillFrames + 1 : 0;
+    lastY = y;
+    if (stillFrames >= SETTLE_FRAMES) {
+      const offset = target.getBoundingClientRect().top - margin;
+      const maxY = document.documentElement.scrollHeight - window.innerHeight;
+      const blocked = offset > 0 ? y >= maxY - 1 : y <= 0;
+      if (Math.abs(offset) < 2 || blocked || realigns >= MAX_REALIGNS) {
+        stop();
+        return;
+      }
+      realigns += 1;
+      stillFrames = 0;
+      target.scrollIntoView({ behavior, block: "start" });
+    }
+    if (performance.now() - startedAt > FOLLOW_TIMEOUT_MS) {
+      stop();
+      return;
+    }
+    frame = requestAnimationFrame(tick);
+  };
+
+  target.scrollIntoView({ behavior, block: "start" });
+  for (const type of USER_SCROLL_EVENTS) window.addEventListener(type, stop, { capture: true, passive: true });
+  frame = requestAnimationFrame(tick);
+  return stop;
+}
+
 /**
  * "The plan for this heist": the article's headings as a table of contents with scroll-spy
  * (source `Ke`). Fixed to the left of the column from 1280px; below that it is a
@@ -33,6 +90,12 @@ export function HeistPlan({ containerRef }: { containerRef: RefObject<HTMLElemen
   const [activeId, setActiveId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const headings = useRef<HTMLElement[]>([]);
+  const stopFollow = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    const follow = stopFollow;
+    return () => follow.current?.();
+  }, []);
 
   // Collect the article's headings once and give each an anchor.
   useEffect(() => {
@@ -72,9 +135,14 @@ export function HeistPlan({ containerRef }: { containerRef: RefObject<HTMLElemen
     const jumpTo = (id: string) => {
       const target = document.getElementById(id);
       if (!target) return;
-      target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-      setActiveId(id);
-      setOpen(false);
+      // Collapse the inline list before measuring: it sits above the article, so closing it
+      // after the scroll starts would shift every heading up by the list's height.
+      flushSync(() => {
+        setActiveId(id);
+        setOpen(false);
+      });
+      stopFollow.current?.();
+      stopFollow.current = scrollToHeading(target);
     };
     let step = 0;
     return (

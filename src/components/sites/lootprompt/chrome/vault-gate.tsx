@@ -1,8 +1,20 @@
 "use client";
 
 import { Lock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { AuthModal, type AuthTab } from "./auth-modal";
+
+/**
+ * Way into the 3D vault (source `Wh`). The clone's account UI is a guest's, so
+ * `enter` opens the members-only gate (the same gate the source's `/vault-3d`
+ * route shows a guest) instead of navigating; render `gateNode` beside the trigger.
+ */
+export function useVaultEntry(): { enter: () => void; gateNode: ReactNode } {
+  const [gateOpen, setGateOpen] = useState(false);
+  const enter = useCallback(() => setGateOpen(true), []);
+  const close = useCallback(() => setGateOpen(false), []);
+  return { enter, gateNode: gateOpen ? <VaultGate onClose={close} /> : null };
+}
 
 /**
  * "The vault is members-only." gate shown to guests who try the 3D vault

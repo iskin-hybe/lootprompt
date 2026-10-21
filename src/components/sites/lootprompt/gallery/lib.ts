@@ -171,8 +171,3 @@ export async function copyText(text: string): Promise<void> {
   area.remove();
   if (!ok) throw new Error("Clipboard is unavailable");
 }
-
-/** Full-page navigation to lootprompt.com routes this clone doesn't build. */
-export function navigateTo(url: string): void {
-  window.location.assign(url);
-}

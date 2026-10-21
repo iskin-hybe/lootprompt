@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { prompts } from "../data";
 import { isCrewOnly } from "../gallery/stores";
@@ -27,12 +28,13 @@ function promptIdFromLink(anchor: HTMLAnchorElement): string | null {
 /**
  * Guest-only layer (source `Zg`): opens the crew gate on `lp:crew-gate`, turns
  * clicks on prompt links into the gate (posts are crew-only for guests), and
- * shows the "Your thief file is waiting" window while no gate is open.
- * In member view prompt links open normally; the rest stays as for a guest.
+ * shows the "Your thief file is waiting" window on the homepage while no gate
+ * is open. In member view prompt links open normally; the rest stays as for a guest.
  */
 export function CrewGateHost() {
   // The source waits for the auth check before treating the visitor as a guest.
   const isGuest = useHydrated();
+  const pathname = usePathname();
   const [gate, setGate] = useState<CrewGateDetail | null>(null);
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export function CrewGateHost() {
           onClose={close}
         />
       ) : null}
-      {gate ? null : <CrewWindow onJoin={() => openCrewGate("home_bubble")} />}
+      {pathname === "/" && !gate ? <CrewWindow onJoin={() => openCrewGate("home_bubble")} /> : null}
     </>
   );
 }

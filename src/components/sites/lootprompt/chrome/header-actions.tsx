@@ -2,25 +2,24 @@
 
 import { Box, Lock } from "lucide-react";
 import { useState } from "react";
-import { SITE_ORIGIN } from "../data";
 import { AuthModal } from "./auth-modal";
 import { ThemeToggle } from "./theme-toggle";
-import { VaultGate } from "./vault-gate";
+import { useVaultEntry } from "./vault-gate";
 
 /** 3D vault shortcut; locked for guests, who get the members-only gate (source `Gh`). */
 function VaultNavLink() {
-  const [gateOpen, setGateOpen] = useState(false);
+  const { enter, gateNode } = useVaultEntry();
 
   return (
     <>
       <a
-        href={`${SITE_ORIGIN}/vault-3d`}
+        href="/vault-3d"
         className="vault-nav-link relative"
         aria-label="The Vault"
         title="Join the crew and unlock 3D prompt stealing."
         onClick={(event) => {
           event.preventDefault();
-          setGateOpen(true);
+          enter();
         }}
       >
         <Box aria-hidden="true" />
@@ -29,7 +28,7 @@ function VaultNavLink() {
           aria-hidden="true"
         />
       </a>
-      {gateOpen ? <VaultGate onClose={() => setGateOpen(false)} /> : null}
+      {gateNode}
     </>
   );
 }

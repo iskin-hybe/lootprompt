@@ -3,7 +3,6 @@
  "pipelineInfo": null,
  "invideoUrl": null,
  "reelUrl": null,
- "ogImage": null,
  "promptBlocks": [
   {
    "label": "GPT IMAGE 2 · STAGE PROMPT",

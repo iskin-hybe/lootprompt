@@ -2,6 +2,7 @@ import "./chrome.css";
 import { AnimationPauser } from "./animation-pauser";
 import { CrewGateHost } from "./crew-gate-host";
 import { HeaderActions } from "./header-actions";
+import { NightShiftSync } from "./night-shift-sync";
 import { PartnerPromo } from "./partner-promo";
 import { RouteTransitions } from "./route-transitions";
 import { VaultPresence } from "./vault-presence";
@@ -15,6 +16,7 @@ export function SiteChrome() {
   return (
     <>
       <RouteTransitions />
+      <NightShiftSync />
       <AnimationPauser />
       <HeaderActions />
       <PartnerPromo />

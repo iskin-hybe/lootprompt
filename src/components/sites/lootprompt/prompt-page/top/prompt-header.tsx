@@ -34,7 +34,7 @@ function BrandPill({ brand }: { brand: Brand }) {
  * media card, video references, reel, title, badges, counts and actions.
  */
 export function PromptHeader() {
-  const { prompt, detail, stealCount } = usePromptPage();
+  const { prompt, detail } = usePromptPage();
   const brand = findBrand(prompt.brandId);
   const reelUrl = detail.reelUrl ?? prompt.reelUrl;
   const pipelineInfo = detail.pipelineInfo ?? prompt.pipelineInfo;
@@ -96,7 +96,8 @@ export function PromptHeader() {
         <span className="top-engagement-detail">
           <Engagement prompt={prompt} />
         </span>
-        <StealCount value={stealCount} ember={false} />
+        {/* The source shows the loaded count here; a steal on this page doesn't bump it. */}
+        <StealCount value={prompt.copyCount} ember={false} />
       </div>
 
       <div className="mt-6">

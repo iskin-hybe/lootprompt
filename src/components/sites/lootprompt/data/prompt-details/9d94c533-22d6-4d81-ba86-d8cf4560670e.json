@@ -3,7 +3,6 @@
  "pipelineInfo": "VIDEO-TO-VIDEO · FORMAT 7S · 9:16 · GENRE PET PORTRAIT",
  "invideoUrl": "https://invideo.io/i/DENIZ-ig",
  "reelUrl": null,
- "ogImage": "/sites/lootprompt/og/9d94c533-22d6-4d81-ba86-d8cf4560670e.png",
  "promptBlocks": [
   {
    "label": "Prompt 1",
@@ -42,7 +41,7 @@
    "original": "/sites/lootprompt/references/2891e20f-067b-46ce-bf51-d8db98f140e7.mp4",
    "ref": "references/9d94c533-22d6-4d81-ba86-d8cf4560670e/2891e20f-067b-46ce-bf51-d8db98f140e7.mov",
    "label": "Motion reference — use with this prompt",
-   "bytes": 3683686,
+   "bytes": 4700727,
    "durationSeconds": 7.12533
   }
  ],
