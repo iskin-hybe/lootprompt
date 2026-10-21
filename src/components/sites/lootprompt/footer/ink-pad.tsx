@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SITE_ORIGIN } from "../data";
 import { Fingerprint } from "./fingerprint";
 import { hasPrinted, leavePrint, patternSeed } from "./guestbook";
 import { InkToaster, type ToastKind, type ToastMessage } from "./ink-toast";
@@ -115,7 +114,7 @@ export function InkPad({ promptId, compact = false }: { promptId: string | null;
     if (!busy && !pressed) submit();
   };
 
-  const crimeSceneHref = `${SITE_ORIGIN}/olay-yeri`;
+  const crimeSceneHref = "/olay-yeri";
 
   return (
     <section aria-label={COPY.sectionLabel} className={compact ? "flex flex-col items-center gap-2" : "mt-14"}>

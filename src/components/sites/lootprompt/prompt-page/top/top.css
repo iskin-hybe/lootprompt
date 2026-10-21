@@ -1,0 +1,36 @@
+/* Prompt page header: rules the shared stylesheets don't already carry here. */
+
+/* gallery.css (where these live for the homepage) isn't loaded on this route. */
+.shared-media {
+  view-transition-name: prompt-media;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shared-media {
+    view-transition-name: none;
+  }
+}
+.save-heart-pop {
+  animation: 0.38s cubic-bezier(0.22, 1, 0.36, 1) save-heart-pop;
+}
+/* hero.css only: the story hint's arrow draws itself in with it. */
+@keyframes ink-draw {
+  0% {
+    stroke-dashoffset: 1000px;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* The detail size of the engagement row (source `size: "detail"`) applied to the
+   gallery's card-size component. */
+.top-engagement-detail {
+  display: contents;
+}
+.top-engagement-detail > span {
+  font-size: 0.8rem;
+}
+.top-engagement-detail svg {
+  width: 15px;
+  height: 15px;
+}

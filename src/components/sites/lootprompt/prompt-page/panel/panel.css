@@ -1,0 +1,60 @@
+/* Source rules the prompt panel needs that no stylesheet on this route loads:
+   the steal jolt (gallery.css carries it for the homepage only) and the loot flight. */
+.paper-jolt {
+  animation: 0.12s steps(2, end) 2 paper-jolt;
+}
+@keyframes paper-jolt {
+  0% {
+    translate: 0;
+  }
+  50% {
+    translate: 1px -1px;
+  }
+  to {
+    translate: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper-jolt {
+    animation: none;
+  }
+}
+.loot-flight-overlay {
+  z-index: 100;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+.loot-flight-drop {
+  background: var(--foreground);
+  box-shadow: 0 0 0 1px var(--background);
+  display: block;
+  position: absolute;
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .loot-flight-drop {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--background) 28%, transparent);
+  }
+}
+.loot-flight-drop {
+  will-change: transform, opacity;
+}
+.loot-flight-drop.is-cream {
+  background: var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+@supports (color: color-mix(in lab, red, red)) {
+  .loot-flight-drop.is-cream {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 45%, transparent);
+  }
+}
+.loot-flight-plus-one {
+  color: var(--foreground);
+  font-family: var(--font-hand);
+  will-change: transform, opacity;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+}

@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { SITE_ORIGIN, homeAggregates, promptHref, prompts, type Category } from "../data";
+import { homeAggregates, prompts, type Category } from "../data";
 import { InstagramIconLink } from "../instagram/instagram-glyph";
 import { LazyMount } from "../shared/lazy-mount";
+import { localPromptHref } from "../shared/member-view";
 import { InkPad } from "./ink-pad";
 import { InstallAppButton } from "./install-app-button";
+import { VaultFooterLink } from "./vault-footer-link";
 
 const CATEGORY_LINKS: { value: Category; label: string }[] = [
   { value: "Video", label: "Video prompts" },
@@ -12,12 +14,15 @@ const CATEGORY_LINKS: { value: Category; label: string }[] = [
   { value: "Audio", label: "Audio prompts" },
 ];
 
+const VAULT_HREF = "/vault-3d";
+
+// Same-origin routes, as in the source. Only "The Vault" has a local stand-in (its guest gate).
 const EXPLORE_LINKS: { href: string; label: string }[] = [
-  { href: `${SITE_ORIGIN}/about`, label: "About LootPrompt" },
-  { href: `${SITE_ORIGIN}/vault-3d`, label: "The Vault" },
-  { href: `${SITE_ORIGIN}/most-wanted`, label: "Most Wanted" },
-  { href: `${SITE_ORIGIN}/jobs`, label: "The Job Board" },
-  { href: `${SITE_ORIGIN}/olay-yeri`, label: "Crime Scene" },
+  { href: "/about", label: "About LootPrompt" },
+  { href: VAULT_HREF, label: "The Vault" },
+  { href: "/most-wanted", label: "Most Wanted" },
+  { href: "/jobs", label: "The Job Board" },
+  { href: "/olay-yeri", label: "Crime Scene" },
 ];
 
 const HEADING = "font-ui text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground";
@@ -73,9 +78,9 @@ export function SiteFooter() {
           <ul className={LIST}>
             {mostStolen.map((prompt) => (
               <li key={prompt.id}>
-                <a href={promptHref(prompt.id)} className={`block truncate ${LINK}`}>
+                <Link href={localPromptHref(prompt.id)} prefetch={false} className={`block truncate ${LINK}`}>
                   {prompt.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -86,9 +91,13 @@ export function SiteFooter() {
           <ul className={LIST}>
             {EXPLORE_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className={LINK}>
-                  {link.label}
-                </a>
+                {link.href === VAULT_HREF ? (
+                  <VaultFooterLink href={link.href} label={link.label} className={LINK} />
+                ) : (
+                  <a href={link.href} className={LINK}>
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

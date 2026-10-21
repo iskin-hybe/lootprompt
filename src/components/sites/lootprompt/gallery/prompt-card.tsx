@@ -2,6 +2,8 @@
 
 // The gallery's prompt card (source: `Wt` in the prompt-card chunk).
 import { Check, Copy, Play } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -16,7 +18,8 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
-import { findBrand, homeAggregates, promptHref, type Prompt } from "../data";
+import { findBrand, homeAggregates, type Prompt } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import {
   BrandStamp,
   Engagement,
@@ -42,7 +45,6 @@ import {
   isEditableTarget,
   isFresh,
   lootLine,
-  navigateTo,
   paperLook,
   paperStyle,
   prefersReducedMotion,
@@ -50,6 +52,7 @@ import {
   showsCount,
 } from "./lib";
 import { SaveHeart } from "./save-heart";
+import { setSharedMedia, useSharedMedia } from "./shared-media";
 import { gateCrewOnly, isCrewOnly, useStolenIds, useVaultLock } from "./stores";
 import { useSteal } from "./use-steal";
 
@@ -106,9 +109,17 @@ export interface PromptCardProps {
   trending?: boolean;
   legendary?: boolean;
   caseNumber?: number;
+  /** Where the card sits; keeps the shared-media morph unique when a prompt shows twice. */
+  scope?: string;
 }
 
-export function PromptCard({ prompt, trending = false, legendary = false, caseNumber }: PromptCardProps) {
+export function PromptCard({
+  prompt,
+  trending = false,
+  legendary = false,
+  caseNumber,
+  scope = "grid",
+}: PromptCardProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
@@ -119,11 +130,14 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
   const motionTimer = useRef<number | null>(null);
 
   const finePointer = useContext(FinePointerContext);
+  const router = useRouter();
   const mounted = useMounted();
   const [motionOn, setMotionOn] = useState(false);
   const { steal, copied, stamp, count } = useSteal(prompt);
   const { locked } = useVaultLock(prompt.id);
   const stolen = useStolenIds();
+  const sharedKey = `${scope}:${prompt.id}`;
+  const sharedMedia = useSharedMedia(sharedKey);
 
   const brand = findBrand(prompt.brandId);
   const look = useMemo(() => paperLook(prompt.id), [prompt.id]);
@@ -132,7 +146,7 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
   const fresh = isFresh(prompt.createdAt);
   const ember = homeAggregates.recently_stolen.includes(prompt.id);
   const stolenHere = stolen.hydrated && stolen.ids.has(prompt.id);
-  const href = promptHref(prompt.id);
+  const href = localPromptHref(prompt.id);
   const poster = prompt.media.poster ?? prompt.media.src;
   const isVideo = prompt.media.type === "video";
   const motionSrc = isVideo ? prompt.media.src : prompt.media.motion;
@@ -153,11 +167,11 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
   const stealOrGate = useCallback(async () => {
     if (gateCrewOnly(prompt.id)) return;
     if (locked) {
-      navigateTo(href);
+      router.push(href);
       return;
     }
     await steal();
-  }, [prompt.id, locked, href, steal]);
+  }, [prompt.id, locked, href, steal, router]);
 
   // "C" steals the card under the pointer (native mouseenter so keyboard focus counts too).
   const stealRef = useRef(stealOrGate);
@@ -286,13 +300,14 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
     if (legendary) resetHolo();
   };
 
-  /** Clicks outside the link/buttons still open the prompt (or the gate).
-   *  Clicks on the link itself are turned into the gate by the chrome for guests. */
+  /** Clicks outside the link/buttons still open the prompt (or, for guests, the gate).
+   *  Guest clicks on the link itself are turned into the gate by the chrome. */
   const onStageClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if ((e.target as HTMLElement).closest("a, button, input, textarea, select, [role='button']")) return;
     if (gateCrewOnly(prompt.id)) return;
-    navigateTo(href);
+    setSharedMedia(sharedKey);
+    router.push(href);
   };
 
   const showSteals = showsCount("steals", count);
@@ -328,8 +343,10 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
         }
       >
         {locked ? null : (
-          <a
+          <Link
             href={href}
+            prefetch={false}
+            onClick={() => setSharedMedia(sharedKey)}
             aria-label={`Open ${prompt.title}`}
             className="absolute inset-0 z-20 cursor-pointer rounded-[15px] outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
           />
@@ -347,6 +364,7 @@ export function PromptCard({ prompt, trending = false, legendary = false, caseNu
           style={{ aspectRatio: aspectRatio(prompt.aspect) }}
           className={
             "card-media cine-glare group/media relative block w-full overflow-hidden bg-foreground/5" +
+            (sharedMedia ? " shared-media" : "") +
             (locked ? " vault-blur" : "")
           }
         >

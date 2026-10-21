@@ -1,15 +1,18 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { prompts, SITE_ORIGIN } from "../data";
+import { prompts } from "../data";
+import { isCrewOnly } from "../gallery/stores";
 import { CREW_GATE_EVENT, openCrewGate, type CrewGateDetail } from "../shared/crew-gate";
+import { MEMBER_VIEW } from "../shared/member-view";
 import { clearGateTarget, CrewGateDialog } from "./crew-gate-dialog";
 import { CrewWindow } from "./crew-window";
 import { useHydrated } from "./use-hydrated";
 
 const PROMPT_PATH = /^\/prompt\/([^/?#]+)\/?$/;
 
-/** The prompt id a link points at, for links to lootprompt.com's prompt pages. */
+/** The prompt id a same-origin link points at, when it opens a prompt page. */
 function promptIdFromLink(anchor: HTMLAnchorElement): string | null {
   let url: URL;
   try {
@@ -17,7 +20,7 @@ function promptIdFromLink(anchor: HTMLAnchorElement): string | null {
   } catch {
     return null;
   }
-  if (url.origin !== window.location.origin && url.origin !== SITE_ORIGIN) return null;
+  if (url.origin !== window.location.origin) return null;
   const match = PROMPT_PATH.exec(url.pathname);
   return match?.[1] ? decodeURIComponent(match[1]) : null;
 }
@@ -25,11 +28,13 @@ function promptIdFromLink(anchor: HTMLAnchorElement): string | null {
 /**
  * Guest-only layer (source `Zg`): opens the crew gate on `lp:crew-gate`, turns
  * clicks on prompt links into the gate (posts are crew-only for guests), and
- * shows the "Your thief file is waiting" window while no gate is open.
+ * shows the "Your thief file is waiting" window on the homepage while no gate
+ * is open. In member view prompt links open normally; the rest stays as for a guest.
  */
 export function CrewGateHost() {
   // The source waits for the auth check before treating the visitor as a guest.
   const isGuest = useHydrated();
+  const pathname = usePathname();
   const [gate, setGate] = useState<CrewGateDetail | null>(null);
 
   useEffect(() => {
@@ -39,6 +44,7 @@ export function CrewGateHost() {
   }, []);
 
   useEffect(() => {
+    if (MEMBER_VIEW) return;
     const onClick = (event: MouseEvent) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
         return;
@@ -46,7 +52,7 @@ export function CrewGateHost() {
       const anchor = target?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!anchor || anchor.target === "_blank") return;
       const promptId = promptIdFromLink(anchor);
-      if (!promptId) return;
+      if (!promptId || !isCrewOnly(promptId)) return;
       event.preventDefault();
       event.stopPropagation();
       openCrewGate("gate_card", promptId);
@@ -75,7 +81,7 @@ export function CrewGateHost() {
           onClose={close}
         />
       ) : null}
-      {gate ? null : <CrewWindow onJoin={() => openCrewGate("home_bubble")} />}
+      {pathname === "/" && !gate ? <CrewWindow onJoin={() => openCrewGate("home_bubble")} /> : null}
     </>
   );
 }

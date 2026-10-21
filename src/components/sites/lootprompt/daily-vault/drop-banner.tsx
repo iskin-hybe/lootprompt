@@ -1,9 +1,11 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
-import { promptHref, prompts } from "../data";
+import { prompts } from "../data";
 import { AuthModal } from "../chrome/auth-modal";
+import { localPromptHref } from "../shared/member-view";
 
 /** The newest prompt in the vault (the source lists prompts newest first). */
 const newest =
@@ -39,13 +41,14 @@ export function DropBanner() {
         <div className="min-w-0">
           <p className="font-hand text-lg leading-none text-muted-foreground">This week&apos;s prompt</p>
           {newest ? (
-            <a
-              href={promptHref(newest.id)}
+            <Link
+              href={localPromptHref(newest.id)}
+              prefetch={false}
               className="mt-1 inline-flex items-center gap-2 font-ui text-base text-foreground transition-colors hover:text-[var(--accent)] sm:text-lg"
             >
               <span className="truncate">{newest.title}</span>
               <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
-            </a>
+            </Link>
           ) : (
             <p className="mt-1 font-ui text-sm text-muted-foreground">Coming soon.</p>
           )}

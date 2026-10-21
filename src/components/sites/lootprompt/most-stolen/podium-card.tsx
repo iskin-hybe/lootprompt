@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { promptHref, type Prompt } from "../data";
+import { type Prompt } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import { useHolo } from "./use-holo";
 
 function prefersReducedMotion() {
@@ -109,8 +111,9 @@ export function PodiumCard({
         if (hoverVideo) videoRef.current?.pause();
       }}
     >
-      <a
-        href={promptHref(prompt.id)}
+      <Link
+        href={localPromptHref(prompt.id)}
+        prefetch={false}
         className="podium-card group relative block overflow-hidden rounded-[15px] border border-[var(--paper-line)] bg-[var(--card-surface)]"
       >
         <MedalStamp rank={rank} shine={shine} />
@@ -165,7 +168,7 @@ export function PodiumCard({
             {`stolen ${formatCount(prompt.copyCount)} ${prompt.copyCount === 1 ? "time" : "times"}`}
           </p>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

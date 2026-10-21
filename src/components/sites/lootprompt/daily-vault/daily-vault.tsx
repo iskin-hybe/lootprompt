@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { PromptCard } from "../gallery/prompt-card";
-import { homeAggregates, promptHref, prompts, SNAPSHOT_AT } from "../data";
+import { homeAggregates, prompts, SNAPSHOT_AT } from "../data";
+import { localPromptHref } from "../shared/member-view";
 import "./daily-vault.css";
 
 type SafeState = "locked" | "opening" | "open";
@@ -120,7 +122,7 @@ export function DailyVault() {
         </div>
         {state === "open" ? (
           <div className="daily-vault-reveal">
-            <PromptCard prompt={pick} />
+            <PromptCard prompt={pick} scope="daily-vault" />
             <p className="mt-2 text-center font-hand text-sm text-muted-foreground">
               Steal today&apos;s pick and it counts double.
             </p>
@@ -156,12 +158,12 @@ export function DailyVault() {
                 return (
                   <li key={entry.day} className="daily-archive-item">
                     {crackedDays.includes(entry.day) ? (
-                      <a href={promptHref(prompt.id)} className="daily-archive-open">
+                      <Link href={localPromptHref(prompt.id)} prefetch={false} className="daily-archive-open">
                         <span className="font-ui text-[0.55rem] uppercase tracking-[0.2em] text-muted-foreground">
                           {pastLabel}
                         </span>
                         <span className="font-hand text-sm leading-tight">{prompt.title}</span>
-                      </a>
+                      </Link>
                     ) : (
                       <button
                         type="button"

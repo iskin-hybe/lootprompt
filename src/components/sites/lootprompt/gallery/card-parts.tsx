@@ -2,6 +2,7 @@
 
 // Small pieces of the prompt card (source: prompt-card chunk + index brand helpers).
 import { Eye, Heart } from "lucide-react";
+import Link from "next/link";
 import {
   useEffect,
   useRef,
@@ -405,8 +406,9 @@ export function InstagramIcon({ className }: { className?: string }) {
 /** Padlock over the week's locked vault post. */
 export function VaultCover({ href }: { href: string }) {
   return (
-    <a
+    <Link
       href={href}
+      prefetch={false}
       onClick={(e) => e.stopPropagation()}
       className="vault-cover absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 text-foreground"
       aria-label="Open locked vault"
@@ -423,6 +425,6 @@ export function VaultCover({ href }: { href: string }) {
       </svg>
       <span className="hand-headline text-2xl">This vault is locked</span>
       <span className="font-ui text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground">enter the code</span>
-    </a>
+    </Link>
   );
 }

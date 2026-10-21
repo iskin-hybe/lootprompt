@@ -1,9 +1,11 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { useState, type CSSProperties } from "react";
-import { jobBoard, promptHref } from "../data";
+import { jobBoard, prompts } from "../data";
 import { openCrewGate } from "../shared/crew-gate";
+import { localPromptHref } from "../shared/member-view";
 import { DenizWorkshop } from "./deniz-workshop";
 import "./job-board.css";
 
@@ -24,6 +26,11 @@ function asWorksJob(value: unknown): WorksJob | null {
   if (!value || typeof value !== "object") return null;
   const v = value as Partial<WorksJob>;
   return typeof v.title === "string" ? { title: v.title, votes: Number(v.votes) || 0 } : null;
+}
+
+/** A finished job links to its prompt page while that prompt is in the local snapshot. */
+function hasLocalPrompt(id: string | null): id is string {
+  return !!id && prompts.some((p) => p.id === id);
 }
 
 function asDoneJobs(value: unknown[]): DoneJob[] {
@@ -189,15 +196,16 @@ export function JobPanel() {
                           </>
                         );
                         const style = { "--i": 4 + i } as CSSProperties;
-                        return job.post_id ? (
-                          <a
+                        return hasLocalPrompt(job.post_id) ? (
+                          <Link
                             key={`${job.title}-${i}`}
-                            href={promptHref(job.post_id)}
+                            href={localPromptHref(job.post_id)}
+                            prefetch={false}
                             className="jp-done"
                             style={style}
                           >
                             {body}
-                          </a>
+                          </Link>
                         ) : (
                           <span key={`${job.title}-${i}`} className="jp-done">
                             {body}

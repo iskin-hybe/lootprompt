@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "../components/sites/lootprompt/fonts.css";
 @import "../components/sites/lootprompt/lootprompt.css";
 
 @custom-variant dark (&:is(.dark *));

@@ -152,7 +152,7 @@
    {
     "id": "49a3b9c8-abc2-4589-ab3f-74d13bbce6e4",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/ca264769-eb36-4445-8fe6-61586a6e02bc/f03b2b8b-3754-4bbd-b41e-b614159cb4e8.mov",
+    "src": "/sites/lootprompt/references/f03b2b8b-3754-4bbd-b41e-b614159cb4e8.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -189,7 +189,7 @@
    {
     "id": "1bd322ca-a362-4914-9317-c11b421facb9",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/4a9aa9fe-65fc-4df7-ab65-277cdd2be1fa/2edd64ac-caae-4f18-9a32-5f171b0098bf.mp4",
+    "src": "/sites/lootprompt/references/2edd64ac-caae-4f18-9a32-5f171b0098bf.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -311,7 +311,7 @@
    {
     "id": "d103224a-cb2d-40a7-8a64-ffbe1db9fb8f",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/ace1d747-4099-449b-b228-5739f67a8be4/131ab7d4-e706-4a7e-913a-f774f6af7952.mp4",
+    "src": "/sites/lootprompt/references/131ab7d4-e706-4a7e-913a-f774f6af7952.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -480,7 +480,7 @@
    {
     "id": "dcd6cfe9-e811-4382-88e1-e561698f70e6",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/a292240c-8a2f-40c8-8135-590758c07d39/2154bd05-5412-48e2-b8e2-2064449f2542.mov",
+    "src": "/sites/lootprompt/references/2154bd05-5412-48e2-b8e2-2064449f2542.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -517,7 +517,7 @@
    {
     "id": "363baf98-c9e2-4cad-ba9b-c2e7bea49dae",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/8c7464fd-63dc-4361-94c8-5c0cbc268931/4cdeeaf3-9b03-4480-ac47-a151b4ccf261.mov",
+    "src": "/sites/lootprompt/references/4cdeeaf3-9b03-4480-ac47-a151b4ccf261.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -566,7 +566,7 @@
    {
     "id": "ff9e4057-6185-4ba4-886a-1c7bbbeaae79",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/436e5e25-b4fe-4475-aada-083413f0894e/03f9634c-531d-4983-926b-f5ee542e2ba3.mp4",
+    "src": "/sites/lootprompt/references/03f9634c-531d-4983-926b-f5ee542e2ba3.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -609,7 +609,7 @@
    {
     "id": "10d7931a-68f3-430c-8d4c-addc3d5f314b",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/dfc77db8-d57f-4f1d-abca-0c08fff23c16/9d88f9a6-86b2-46d0-a133-0d6c6848c44b.mov",
+    "src": "/sites/lootprompt/references/9d88f9a6-86b2-46d0-a133-0d6c6848c44b.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -652,7 +652,7 @@
    {
     "id": "ce84a480-87d5-4358-9988-110ff6e6a560",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/236f9a08-deec-41b5-bd4a-ad1a11920ad6/e761940e-9220-413a-afb6-9644ec0126d8.mov",
+    "src": "/sites/lootprompt/references/e761940e-9220-413a-afb6-9644ec0126d8.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -701,7 +701,7 @@
    {
     "id": "b150edee-f978-403d-a4c9-451b4a194b04",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/6bc2402b-db5d-4802-8138-83691274f043/99b1e967-2b02-4736-b729-e786b51b321c.mov",
+    "src": "/sites/lootprompt/references/99b1e967-2b02-4736-b729-e786b51b321c.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -750,7 +750,7 @@
    {
     "id": "245ef3d1-f352-4b77-9de6-d8ad681313fe",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/ed223878-e269-4273-af7e-8f4e69c10c71/80bc359d-0deb-4d82-bf09-461b4af46f22.mov",
+    "src": "/sites/lootprompt/references/80bc359d-0deb-4d82-bf09-461b4af46f22.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
@@ -848,7 +848,7 @@
    {
     "id": "837fa4d7-4ae3-40fe-bf6b-249c73abd888",
     "type": "video",
-    "src": "https://dfwqsyalprftvqwrtjkh.supabase.co/storage/v1/object/public/media/references/9d94c533-22d6-4d81-ba86-d8cf4560670e/2891e20f-067b-46ce-bf51-d8db98f140e7.mov",
+    "src": "/sites/lootprompt/references/2891e20f-067b-46ce-bf51-d8db98f140e7.mp4",
     "label": "Motion reference — use with this prompt"
    }
   ],
